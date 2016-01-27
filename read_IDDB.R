@@ -36,7 +36,7 @@ q1 <- dbGetQuery(db,"SELECT DISTINCT *
 					AND table_epievent.disease_id=table_disease.disease_id
 					AND table_location.location_id=table_epievent.location_id
 					AND table_location.country='HAITI')")
-print(q1)
+print(head(q1))
 
 # Nothing is filtered:
 q.all <- dbGetQuery(db,"SELECT DISTINCT *
@@ -45,12 +45,17 @@ q.all <- dbGetQuery(db,"SELECT DISTINCT *
 					table_epievent.disease_id = table_disease.disease_id
 					AND table_location.location_id = table_epievent.location_id)")
 
-# Reformat before plots
+# Disconnect when finish querying the database:
+dbDisconnect(db)
+
+# Reformat before plots:
 q.all$reportdate <- as.Date(q.all$reportdate)
 q.all$fullloc <- paste(q.all$country,q.all$adminDiv1,q.all$adminDiv2)
 
 ## Plots
+pdf("plot.pdf",width=15,height=10)
 g <- ggplot(q.all)+geom_step(aes(x=reportdate,y=count,colour=eventtype),size=1)
 g <- g + ggtitle("Epidemics in database")
 g <- g +facet_wrap(~fullloc+disease_name,scales = "free")
 plot(g)
+dev.off()
