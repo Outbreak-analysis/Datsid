@@ -22,6 +22,8 @@ CREATE TABLE "table_location" (
 
 CREATE TABLE "table_epievent" (
 	`epievent_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`disease_id`	INTEGER,
+	`location_id`	INTEGER,
 	`eventdate`	TEXT,
 	`reportdate`	TEXT,
 	`count`	INTEGER,
@@ -31,8 +33,6 @@ CREATE TABLE "table_epievent" (
 	`agemax`	INTEGER,
 	`gender`	TEXT,
 	`socialstruct`	TEXT,
-	`disease_id`	INTEGER,
-	`location_id`	INTEGER,
 	`synthetic`	INTEGER,
 	`source`	TEXT,
 	FOREIGN KEY(`disease_id`) REFERENCES `table_disease`(`disease_id`),
@@ -40,6 +40,8 @@ CREATE TABLE "table_epievent" (
 );
 
 CREATE TABLE "tmp_epievent" (
+	`disease_id`	INTEGER,
+	`location_id`	INTEGER,
 	`eventdate`	TEXT,
 	`reportdate`	TEXT,
 	`count`	INTEGER,
@@ -49,8 +51,6 @@ CREATE TABLE "tmp_epievent" (
 	`agemax`	INTEGER,
 	`gender`	TEXT,
 	`socialstruct`	TEXT,
-	`disease_id`	INTEGER,
-	`location_id`	INTEGER,
 	`synthetic`	INTEGER,
 	`source`	TEXT,
 	FOREIGN KEY(`disease_id`) REFERENCES `table_disease`(`disease_id`),
