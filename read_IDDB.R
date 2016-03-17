@@ -13,7 +13,7 @@ print(tbl)
 dbListFields(db, "table_epievent")
 
 ## The data in a table
-head(dbReadTable(db, "table_epievent"))
+tail(dbReadTable(db, "table_epievent"))
 dbReadTable(db, "table_disease")
 dbReadTable(db, "table_location")
 
