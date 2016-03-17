@@ -1,0 +1,13 @@
+location_id,country,adminDiv1,adminDiv2,adminDiv3,adminDiv4,latitude,longitude
+1,MEXICO,,,,,,
+2,MEXICO,Veracruz,Perote,,,19.3981,-97.2812
+3,CANADA,,,,,,
+4,FRANCE,,,,,,
+5,USA,,,,,,
+6,HAITI,,,,,,
+7,UK,,,,,,
+8,UK,London,,,,51.514312,-0.113264
+9,AUSTRALIA,,,,,,
+10,RDC,,,,,,
+11,LIBERIA,,,,,,
+12,SOUTHKOREA,,,,,37.549494,127.028213

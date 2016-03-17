@@ -1,0 +1,8 @@
+disease_id,disease_name,disease_ICD,disease_type,disease_subtype,disease_subtype2
+1,influenza,J10,A,H1N1,
+2,influenza,J10,A,H3N2,
+3,ebola,A98.4,,,
+4,cholera,A00.0,,,
+5,measles,B05,,,
+6,influenza,J10,,,
+7,MERS-CoV,B34.2,,,
