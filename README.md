@@ -1,15 +1,12 @@
 # tmp_data
 Temporary repo showing a database example.
 
-Run `Rscript read_IDDB.R`
 
 To add data in the data base:
-- if new disease add it in `table_disease` ('browse Data' in SqliteBrowser')
-- if new location add it in `table_location`
-- insert data in Excel spreadsheet template `table_epievent.xlsx` (make sure the first column `epieventid` is copied down)
-- save Excel spreadsheet as a `csv` file (NO HEADERS & ONLY NEW DATA!)
+- if new disease add it in `tables/table_disease.csv` 
+- if new location add it in `tables/table_location.csv`
+- insert data using Excel spreadsheet template `table_epievent_template.xlsx`
+- 
+- save Excel spreadsheet as a `csv` file (NO HEADERS)
 
-`sqlite3 IDDB-test.db`
-`sqlite> .mode csv`
-`sqlite> .import path/foo.csv table_epievent`
-
+`buildNewDB xxx.db` creates a new database filled with data from csv files in `data` and `tables` folders.
