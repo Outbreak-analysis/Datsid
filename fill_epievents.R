@@ -19,8 +19,6 @@ table.disease <- read.csv("tables/table_disease.csv")
 dbWriteTable(db,"table_location", table.location, append=TRUE)
 dbWriteTable(db,"table_disease", table.disease, append=TRUE)
 
-
-
 ## Import new data in existing database:
 for(i in 1:length(csvlist)){
 	newdat <- read.csv(file = csvlist[i], header = F)
