@@ -6,3 +6,4 @@ disease_id,disease_name,disease_ICD,disease_type,disease_subtype,disease_subtype
 5,measles,B05,,,
 6,influenza,J10,,,
 7,MERS-CoV,B34.2,,,
+99999,synthetic,ZZ999,,,

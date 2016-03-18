@@ -1,0 +1,1 @@
+Rscript generate_synthDataSets.R $1
