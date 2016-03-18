@@ -96,10 +96,12 @@ for(i in 1:length(prm)){
 
 # Re-format dataframe for database:
 n <- nrow(df)
+
+date_vec <- format(Sys.Date()+ df$tb, "%Y-%m-%d")
 df.db <- data.frame(disease_id = 99999,
 					location_id = 99999,
-					eventdate = df$tb,
-					reportdate = df$tb,
+					eventdate = date_vec,
+					reportdate = date_vec,
 					count = df$inc,
 					eventype = "incidence",
 					eventype2 = "",

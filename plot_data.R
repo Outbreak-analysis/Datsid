@@ -23,10 +23,23 @@ dbDisconnect(db)
 q.all$reportdate <- as.Date(q.all$reportdate)
 q.all$fullloc <- paste(q.all$country,q.all$adminDiv1,q.all$adminDiv2)
 
+q.all.real <- subset(q.all, synthetic==0)
+q.all.syn <- subset(q.all, synthetic>0)
+
+q.all.syn$source2 <- substr(q.all.syn$source,1,6)
+
 ## Plots
 pdf(paste0("plot_data_",db.name,".pdf"),width=35,height=20)
-g <- ggplot(q.all)+geom_step(aes(x=reportdate,y=count,colour=eventtype),size=1)
-g <- g + ggtitle("Epidemics in database")
+
+g <- ggplot(q.all.real)+geom_step(aes(x=reportdate,y=count,colour=eventtype),size=1)
+g <- g + ggtitle("Real epidemics in database")
 g <- g + facet_wrap(~fullloc+disease_name,scales = "free",ncol = 4)
 plot(g)
+
+g <- ggplot(q.all.syn)+geom_step(aes(x=reportdate,y=count,colour=eventtype),size=1)
+g <- g + ggtitle("Synthetic epidemics in database")
+g <- g + facet_wrap(~fullloc+disease_name+source2+synthetic,scales = "free")
+#g <- g + theme(strip.text.x = element_text(size = 8, colour = "black"))
+plot(g)
+
 dev.off()

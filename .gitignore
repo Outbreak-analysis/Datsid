@@ -6,3 +6,5 @@
 *.db
 
 *.db
+
+data/syn-data.csv
