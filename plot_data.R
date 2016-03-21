@@ -2,49 +2,51 @@ library(ggplot2)
 library(DBI)
 library(RSQLite)
 
-args <- commandArgs(trailingOnly = TRUE)
-if (length(args)<1) stop("Not enough arguments!")
-db.name <- args[1]
+source("read_db.R")
 
-# Connect to the database
-db = dbConnect(SQLite(), dbname=db.name)
-
-# Nothing is filtered:
-q.all <- dbGetQuery(db,"SELECT DISTINCT *
-					FROM table_epievent,table_disease,table_location 
-					WHERE (
-					table_epievent.disease_id = table_disease.disease_id
-					AND table_location.location_id = table_epievent.location_id)")
-
-# Disconnect when finish querying the database:
-dbDisconnect(db)
-
-# Reformat before plots:
-q.all$reportdate <- as.Date(q.all$reportdate)
-q.all$fullloc <- paste(q.all$country,q.all$adminDiv1,q.all$adminDiv2)
-tmp <- substr(q.all$eventtype2,1,6)
-tmp[is.na(tmp)] <- ""
-tmp2 <- q.all$socialstruct
-tmp2[is.na(tmp2)] <- ""
-q.all$datatype <- paste(q.all$eventtype,tmp,tmp2)
-
-q.all.real <- subset(q.all, synthetic==0)
-q.all.syn <- subset(q.all, synthetic>0)
-
-q.all.syn$source2 <- substr(q.all.syn$source,1,6)
-
-## Plots
-pdf(paste0("plot_data_",db.name,".pdf"),width=35,height=20)
-
-g <- ggplot(q.all.real)+geom_step(aes(x=reportdate,y=count,colour=datatype),size=1)
-g <- g + ggtitle("Real epidemics in database")
-g <- g + facet_wrap(~fullloc+disease_name,scales = "free",ncol = 4)
-plot(g)
-
-g <- ggplot(q.all.syn)+geom_step(aes(x=reportdate,y=count,colour=datatype),size=1)
-g <- g + ggtitle("Synthetic epidemics in database")
-g <- g + facet_wrap(~fullloc+disease_name+source+synthetic,scales = "free")
-#g <- g + theme(strip.text.x = element_text(size = 8, colour = "black"))
-plot(g)
-
-dev.off()
+plot_data <- function(db.name, 
+					  country = NULL, 
+					  disease = NULL, 
+					  synthetic = NULL,
+					  logscale = FALSE) {
+	
+	dat <- get.epi.ts(db.name, 
+					  country,
+					  disease,
+					  synthetic) 
+	
+	# Reformat before plots:
+	dat$reportdate <- as.Date(dat$reportdate)
+	dat$fullloc <- paste(dat$country,dat$adminDiv1,dat$adminDiv2)
+	tmp <- substr(dat$eventtype2,1,6)
+	tmp[is.na(tmp)] <- ""
+	tmp2 <- dat$socialstruct
+	tmp2[is.na(tmp2)] <- ""
+	dat$datatype <- paste(dat$eventtype,tmp,tmp2)
+	dat$sourcedata <- paste("source:", substr(dat$source,1,24))
+	dat$synthetic.plot <- paste("synthetic:",dat$synthetic)
+	dat$synthetic.plot[dat$synthetic==0] <- "Real epidemic"
+	
+	## Plots
+	
+	g <- ggplot(dat)
+	
+	if(!logscale) {
+		g <- g + geom_step(aes(x=reportdate,
+							   y=count,
+							   colour=datatype),size=2)
+	}
+	if(logscale) {
+		g <- g + geom_point(aes(x=reportdate,
+								y=count,
+								colour=datatype),size=2)
+		g <- g + geom_line(aes(x=reportdate,
+								y=count,
+								colour=datatype),size=1, alpha=0.5)
+		g <- g + scale_y_log10()
+	}
+	g <- g + facet_wrap(~fullloc + disease_name + sourcedata + synthetic.plot,
+						scales = "free")
+	
+	plot(g)
+}
