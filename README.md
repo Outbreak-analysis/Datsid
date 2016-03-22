@@ -10,7 +10,7 @@ Structure
  * `data` folder contains the `.csv` files containing the epidemiological data that populates the database. Note there are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`. The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data. The format for `csv` files is without headers and as many columns as there are in the `table_epievent` table (discarding the first column which consists of unique IDs).
  * `tables` folder specifying the SQL tables.
   
- See the `documentation` folder for the database diagram.
+See the `documentation` folder for the database diagram.
 
 To add data in the data base:
 - if new disease add it in `tables/table_disease.csv` 
