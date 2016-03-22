@@ -10,7 +10,7 @@ Before it can be built, epidemiological time series of incidence, deaths, etc. m
 Structure
 ========
  * `data` folder contains the `.csv` files containing the epidemiological data that populates the database. Note there are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`. The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data.
- * `tables` folder specify
+ * `tables` folder specifying the SQL tables.
 
 To add data in the data base:
 - if new disease add it in `tables/table_disease.csv` 
