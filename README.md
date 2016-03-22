@@ -18,6 +18,8 @@ To add data in the data base:
 - if new epidemiological data (incidence,etc.):
   - insert data using Excel spreadsheet template `table_epievent_template.xlsx` (Warning: date must be string formated as yyyy-mm-dd)
   - save Excel spreadsheet as a `csv` using the macro in `__convert_to_csv.xlsm`
-  - execute `buildNewDB xxx.db` to create a new database (named `xxx.db`) filled with data from csv files in `data` and `tables` folders.
+- two options:
+  - to add this new data set to an existing database, execute `add_timeseries xxx.db yyy.csv` to include in the existing database `xxx.db` data saved in `yyy.csv`.
+  - to rebuild the _whole_ database, execute `buildNewDB xxx.db` (create a new database (named `xxx.db`) filled with data from all csv files in `data` and `tables` folders)
 
 
