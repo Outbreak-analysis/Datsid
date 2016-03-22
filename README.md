@@ -1,5 +1,4 @@
-# tmp_data
-Temporary repo showing a database example.
+**Da**tabase of **t**ime **s**eries of **i**nfectious **d**iseases (Datsid)
 
 Overview
 ========
