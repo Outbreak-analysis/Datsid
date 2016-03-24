@@ -67,7 +67,13 @@ for(d in Dvec){
 	}
 }
 
-message(paste("   ===> Simulating",length(prm),"x",prmfxd[["n.MC"]],"parameter sets...\n"))
+message(paste("\n ===> Simulating",
+			  length(prm)*prmfxd[["n.MC"]],
+			  "synthetic data = ",
+			  length(prm),
+			  "parameter sets x",
+			  prmfxd[["n.MC"]],"MC ====\n")
+		)
 
 t1 <- as.numeric(Sys.time())
 # Run all data sets 
@@ -112,12 +118,15 @@ df.db <- data.frame(disease_id = 99999,
 					synthetic = df$mc,
 					source = df$title)
 
+filesave <- "../syn-data.csv"
+
 write.table(x = df.db, 
-			file = "../syn-data.csv", 
+			file = filesave, 
 			col.names = FALSE,
 			row.names = FALSE,
 			sep = ",")
 
+message(paste("\n\n--> SYNTHETIC DATA SAVED IN:",filesave,"\n"))
 
 pdf("plot_synthdata.pdf",width=22,height = 15)
 g <- ggplot(df) + geom_step(aes(x=tb,y=inc,colour=factor(mc)),size=1)
