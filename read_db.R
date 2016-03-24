@@ -13,6 +13,12 @@ get.list.existing <- function(db.path){
 }
 
 
+get.list.sources <- function(db.path){
+	x <- get.epi.ts(db.path,NULL,NULL,NULL)	
+	return(unique(x$source))
+}
+
+
 get.epi.ts <- function(db.path, 
 					   country,
 					   disease,

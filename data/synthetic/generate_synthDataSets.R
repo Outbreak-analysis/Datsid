@@ -90,8 +90,10 @@ df <- data.frame()
 mc.chosen <- 1:4
 
 for(i in 1:length(prm)){
-	title <- paste(names(SIM[[i]][["param"]]),SIM[[i]][["param"]],sep="=",collapse = ";")
-	title <- paste0("SET ",i,": ",title)
+	title <- paste(names(SIM[[i]][["param"]]),
+				   SIM[[i]][["param"]],
+				   sep="_", collapse = ";")
+	title <- paste0("BACKTEST_",i,";",title)
 	tmp <- SIM[[i]][["inc"]]
 	tmp <- subset(tmp, mc %in% mc.chosen)
 	tmp$title <-factor(title)
