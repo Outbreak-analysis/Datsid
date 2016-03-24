@@ -7,7 +7,7 @@ The database is built from epidemiological time series (incidence, deaths, etc.)
 
 Structure
 ========
- * `data` folder contains the `.csv` files containing the epidemiological data that populates the database. Note there are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`. The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data. The format for `csv` files is without headers and as many columns as there are in the `table_epievent` table (discarding the first column which consists of unique IDs).
+ * `data` folder contains the `.csv` files containing the epidemiological data that populates the database. Note there are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`. The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data.  The `csv` files should not have headers. There should be one column corresponding to each column in the SQL table (except for the first column which consists of unique IDs).
  * `tables` folder specifying the SQL tables.
   
 See the `documentation` folder for the database diagram.
@@ -20,7 +20,7 @@ To add data in the data base:
   - save Excel spreadsheet as a `csv` using the macro in `__convert_to_csv.xlsm`
 - two options:
   - to add this new data set to an existing database, execute `add_timeseries xxx.db yyy.csv` to include in the existing database `xxx.db` data saved in `yyy.csv`.
-  - to rebuild the _whole_ database, execute `buildNewDB xxx.db` (create a new database (named `xxx.db`) filled with data from all csv files in `data` and `tables` folders)
+  - to rebuild the _whole_ database, execute `./buildNewDB xxx.db` (create a new database (named `xxx.db`) filled with data from all csv files in `data` and `tables` folders)
 
 Synthetic Data
 ==============
@@ -33,7 +33,5 @@ Running `gen-syndata n` will generate `n` stochastic realizations for each param
 Using the database in R
 =======================
 The file `test.R` shows how an epidemic time series can simple be called from the database by refering, for example, to its country and disease name. Run `Rscript test.R` for an example.
-
-
 
 

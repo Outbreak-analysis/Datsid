@@ -1,4 +1,4 @@
-source("read_DB.R")
+source("read_db.R")
 
 # Build a new database:
 db.name <- "test.db"
