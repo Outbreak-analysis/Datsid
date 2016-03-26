@@ -1,1 +1,2 @@
+cd $(dirname $0) 
 Rscript generate_synthDataSets.R $1

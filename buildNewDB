@@ -1,3 +1,4 @@
+cd $(dirname $0) 
 sqlite3 $1 < ./sql/create_tables.sql
 Rscript fill_epievents.R $1
 Rscript plot_data.R $1
