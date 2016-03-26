@@ -11,7 +11,7 @@ source("SEmInR_Gillespie_FCT.R")
 args <- commandArgs(trailingOnly = TRUE)
 n.MC <- as.numeric(args[1])
 # --- debug
-# n.MC <- 3
+# n.MC <- 3 ; warning(" * * * * * * n.MC overridden! ")
 # - - - ---
 wrap.sim <- function(prm,prmfxd) {
 	
@@ -50,20 +50,35 @@ prmfxd <- list(horizon.years = 1.3,
 			   remove.fizzles = TRUE)
 
 # Define the various model parameters (data sets):
-Dvec <- c(2, 8)
-R0vec <- c(1.5, 3, 6)
-nI <- nE <- 5
+
+sp <- read.csv("syndata-prmset.csv", header=F)
+
+get.syn.prm <- function(sp,name){
+	tmp <- sp[sp[,1]==name,][-1]
+	return(as.numeric(na.omit(as.numeric(tmp))))
+}
+
+# Read model parameters 
+# that will generate synthetic data
+Dvec  <- get.syn.prm(sp,"DOLI.days") #c(2,8)#
+R0vec <- get.syn.prm(sp,"R0") #c(1.5,4) #get.syn.prm(sp,"R0")
+nEvec <- get.syn.prm(sp,"nE") # 5# get.syn.prm(sp,"nE")
+nIvec <- get.syn.prm(sp,"nI") #5# get.syn.prm(sp,"nI")
 
 prm <- list()
 cnt <- 1
 for(d in Dvec){
 	for(r in R0vec){
-		prm[[cnt]] <- list(DOL.days = d,
-						 DOI.days = d,
-						 R0 = r,
-						 nE = nE,
-						 nI = nI)
-		cnt <- cnt + 1
+		for(nE in nEvec){
+			for(nI in nIvec){
+				prm[[cnt]] <- list(DOL.days = d,
+								   DOI.days = d,
+								   R0 = r,
+								   nE = nE,
+								   nI = nI)
+				cnt <- cnt + 1
+			}
+		}
 	}
 }
 
@@ -76,6 +91,7 @@ message(paste("\n ===> Simulating",
 		)
 
 t1 <- as.numeric(Sys.time())
+
 # Run all data sets 
 sfInit(parallel = TRUE, cpu = detectCores())
 sfLibrary(adaptivetau)
@@ -98,7 +114,6 @@ for(i in 1:length(prm)){
 	tmp$title2 <- i
 	df <- rbind(df, tmp)
 }
-
 
 # Re-format dataframe for database:
 n <- nrow(df)
