@@ -13,94 +13,38 @@ n.MC <- as.numeric(args[1])
 # --- debug
 # n.MC <- 3 ; warning(" * * * * * * n.MC overridden! ")
 # - - - ---
-wrap.sim <- function(prm,prmfxd) {
-	
-	# unpack fixed parameters:
-	horizon.years <- prmfxd[["horizon.years"]]
-	pop.size <- prmfxd[["pop.size"]]
-	I.init <- prmfxd[["I.init"]]
-	n.MC <- prmfxd[["n.MC"]]
-	remove.fizzles <- prmfxd[["remove.fizzles"]]
-	
-	# unpack variable parameters:
-	DOL.days <- prm[["DOL.days"]]
-	DOI.days <- prm[["DOI.days"]]
-	R0 <- prm[["R0"]]
-	nE <- prm[["nE"]]
-	nI <- prm[["nI"]]
-	
-	sim <- simul.SEmInR(horizon.years=horizon.years ,
-						DOL.days=DOL.days,
-						DOI.days=DOI.days,
-						R0=R0 ,
-						pop.size=pop.size,
-						nE=nE,
-						nI=nI,
-						I.init=I.init,
-						n.MC=n.MC,
-						remove.fizzles=remove.fizzles,
-						save.to.Rdata.file = FALSE)
-	return(sim)
-}
 
-prmfxd <- list(horizon.years = 1.3,
+
+prmfxd.SEmInR <- list(horizon.years = 1.3,
 			   pop.size = 1E4,
 			   I.init = 2,
 			   n.MC = n.MC,
 			   remove.fizzles = TRUE)
 
-# Define the various model parameters (data sets):
 
-sp <- read.csv("syndata-prmset.csv", header=F)
+prm <- create.SEmInR.prm("syndata-prmset.csv")
 
-get.syn.prm <- function(sp,name){
-	tmp <- sp[sp[,1]==name,][-1]
-	return(as.numeric(na.omit(as.numeric(tmp))))
-}
 
-# Read model parameters 
-# that will generate synthetic data
-Dvec  <- get.syn.prm(sp,"DOLI.days") #c(2,8)#
-R0vec <- get.syn.prm(sp,"R0") #c(1.5,4) #get.syn.prm(sp,"R0")
-nEvec <- get.syn.prm(sp,"nE") # 5# get.syn.prm(sp,"nE")
-nIvec <- get.syn.prm(sp,"nI") #5# get.syn.prm(sp,"nI")
 
-prm <- list()
-cnt <- 1
-for(d in Dvec){
-	for(r in R0vec){
-		for(nE in nEvec){
-			for(nI in nIvec){
-				prm[[cnt]] <- list(DOL.days = d,
-								   DOI.days = d,
-								   R0 = r,
-								   nE = nE,
-								   nI = nI)
-				cnt <- cnt + 1
-			}
-		}
-	}
-}
 
-message(paste("\n ===> Simulating",
-			  length(prm)*prmfxd[["n.MC"]],
-			  "synthetic data = ",
-			  length(prm),
-			  "parameter sets x",
-			  prmfxd[["n.MC"]],"MC ====\n")
-		)
-
-t1 <- as.numeric(Sys.time())
 
 # Run all data sets 
-sfInit(parallel = TRUE, cpu = detectCores())
+
+t1 <- as.numeric(Sys.time())
+message(paste("\n ===> Simulating",
+			  length(prm)*prmfxd.SEmInR[["n.MC"]],
+			  " SEmInR synthetic data = ",
+			  length(prm),
+			  "parameter sets x",
+			  prmfxd.SEmInR[["n.MC"]],"MC ====\n")
+)
+sfInit(parallel = F, cpu = detectCores())
 sfLibrary(adaptivetau)
 sfLibrary(plyr)
 sfExportAll()
-SIM <- sfSapply(prm, wrap.sim, prmfxd=prmfxd, simplify = FALSE)
+SIM <- sfSapply(prm, wrap.sim.SEmInR, prmfxd.SEmInR=prmfxd.SEmInR, simplify = FALSE)
 sfStop()
-
-message("... done.")
+message("... simulations done.")
 
 df <- data.frame()
 
