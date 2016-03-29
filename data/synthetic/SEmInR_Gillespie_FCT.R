@@ -15,10 +15,12 @@ trans.SEmInR <- function(nE,nI){
 	z <- list(c(S=-1, E1=1))
 	
 	# transition through E_k compartments
-	for(i in 2:nE){
-		tmp <- c(-1,1)
-		names(tmp) <- c(paste0("E",i-1),paste0("E",i))
-		z <- lappend(z,tmp)
+	if(nE>1){
+		for(i in 2:nE){
+			tmp <- c(-1,1)
+			names(tmp) <- c(paste0("E",i-1),paste0("E",i))
+			z <- lappend(z,tmp)
+		}
 	}
 	
 	# infectiousness triggered:
@@ -27,12 +29,13 @@ trans.SEmInR <- function(nE,nI){
 	z <- lappend(z,tmp)
 	
 	# transition through I_k compartments
-	for(i in 2:nI){
-		tmp <- c(-1,1)
-		names(tmp) <- c(paste0("I",i-1),paste0("I",i))
-		z <- lappend(z,tmp)
+	if(nI>1){
+		for(i in 2:nI){
+			tmp <- c(-1,1)
+			names(tmp) <- c(paste0("I",i-1),paste0("I",i))
+			z <- lappend(z,tmp)
+		}
 	}
-	
 	# Recovery
 	tmp <- c(-1,1)
 	names(tmp) <-  c(paste0("I",nI),"R")
@@ -91,7 +94,7 @@ simul.SEmInR <- function(horizon.years,# horizon of the simulation
 						 epsilon = 0.05,
 						 seed = 1234,
 						 save.to.Rdata.file = TRUE 
-						 ) {
+) {
 	
 	### Simulate several epidemics with 
 	### a SEmInR stochastic model.
@@ -147,10 +150,15 @@ simul.SEmInR <- function(horizon.years,# horizon of the simulation
 		idx.I <- grepl("I",colnames(res.ATAU))
 		idx.IE <- as.logical(idx.E+idx.I)
 		idx.S <- which(grepl("S",colnames(res.ATAU)))
+		
+		prev <- apply(res.ATAU[,idx.IE],1,sum)
+		if(nI>1) prevI <- apply(res.ATAU[,idx.I],1,sum)
+		if(nI==1) prevI <- res.ATAU[,idx.I]
+		
 		tmp <- data.frame(t = res.ATAU[,1], 
 						  inc = c(I0,-diff(res.ATAU[,idx.S])),
-						  prev = apply(res.ATAU[,idx.IE],1,sum),
-						  prevI = apply(res.ATAU[,idx.I],1,sum),
+						  prev = prev,
+						  prevI = prevI,
 						  mc = rep(mc,nrow(res.ATAU)))
 		
 		# Aggregate in time buckets
@@ -164,7 +172,7 @@ simul.SEmInR <- function(horizon.years,# horizon of the simulation
 	
 	# Remove fizzles:
 	if(remove.fizzles){
-		 
+		
 		sim.nofizz = ddply(all.sim,.variables = c("mc"),
 						   summarize,
 						   i.max = max(prev))
@@ -206,6 +214,97 @@ simul.SEmInR <- function(horizon.years,# horizon of the simulation
 	# Objects returned:
 	return(list(inc = inc.tb, 
 				param = param.synthetic.sim)
-				)
+	)
+	
+}
 
+
+wrap.sim.SEmInR <- function(prm,prmfxd) {
+	
+	# unpack fixed parameters:
+	horizon.years <- prmfxd[["horizon.years"]]
+	pop.size <- prmfxd[["pop.size"]]
+	I.init <- prmfxd[["I.init"]]
+	n.MC <- prmfxd[["n.MC"]]
+	remove.fizzles <- prmfxd[["remove.fizzles"]]
+	
+	# unpack variable parameters:
+	DOL.days <- prm[["DOL.days"]]
+	DOI.days <- prm[["DOI.days"]]
+	R0 <- prm[["R0"]]
+	nE <- prm[["nE"]]
+	nI <- prm[["nI"]]
+	
+	sim <- simul.SEmInR(horizon.years=horizon.years ,
+						DOL.days=DOL.days,
+						DOI.days=DOI.days,
+						R0=R0 ,
+						pop.size=pop.size,
+						nE=nE,
+						nI=nI,
+						I.init=I.init,
+						n.MC=n.MC,
+						remove.fizzles=remove.fizzles,
+						save.to.Rdata.file = FALSE)
+	return(sim)
+}
+
+create.SEmInR.prm <- function(filename){
+	
+	sp <- read.csv(filename, header=F)
+	
+	get.syn.prm <- function(sp,name){
+		tmp <- sp[sp[,1]==name,][-1]
+		return(as.numeric(na.omit(as.numeric(tmp))))
+	}
+	
+	# Read model parameters 
+	# that will generate synthetic data
+	Dvec  <- get.syn.prm(sp,"DOLI.days") 
+	R0vec <- get.syn.prm(sp,"R0") 
+	nEvec <- get.syn.prm(sp,"nE") 
+	nIvec <- get.syn.prm(sp,"nI") 
+	
+	prm <- list()
+	cnt <- 1
+	for(d in Dvec){
+		for(r in R0vec){
+			for(nE in nEvec){
+				for(nI in nIvec){
+					prm[[cnt]] <- list(DOL.days = d,
+									   DOI.days = d,
+									   R0 = r,
+									   nE = nE,
+									   nI = nI)
+					cnt <- cnt + 1
+				}
+			}
+		}
+	}
+	return(prm)
+}
+
+test <- function() {
+	
+	
+	sim <- simul.SEmInR(horizon.years = 1,# horizon of the simulation 
+						DOL.days = 3,     # duration of latency in DAYS
+						DOI.days = 2,     # duration of infectiousness in DAYS
+						R0 = 2.5,
+						pop.size = 1e4,     # population size (Population size needs to be very large for convergence stochastic -> deterministic)
+						nE = 2,           # Number of "exposed" compartment for Erlang distribution
+						nI = 1,           # Number of "infectious" compartment for Erlang distribution
+						I.init = 5,       # Initial number of infectious individuals
+						n.MC = 1,
+						time.bucket = 1/365,     # Aggregation of all events in a time bucket unit
+						remove.fizzles = FALSE,
+						thres.fizz = 0.1,        # Threshold (fraction of max incidence) to identify fizzles
+						do.adaptivetau = TRUE,
+						epsilon = 0.05,
+						seed = 1234,
+						save.to.Rdata.file = FALSE)
+	
+	plot(sim$inc$tb,sim$inc$inc,typ='s')
+	
+						
 }
