@@ -56,6 +56,9 @@ sfStop()
 message("... simulations done.")
 
 reformat.synthetic.for.db <- function(SIM, prm, label) {
+	### REFORMAT SYNTHETIC DATA FOR DATABASE
+	### 'label' IS THE LABEL FOR THE MODEL THAT
+	### GENERATED THE DATA.
 	
 	df <- data.frame()
 	# Merge and label database's source with
@@ -101,7 +104,6 @@ ref.RESuDe <- reformat.synthetic.for.db(SIM = SIM.RESuDe,
 										label = "RESuDe")
 
 save.and.plot <- function(ref, modelname){
-	
 	df <- ref[["df"]]
 	df.db <- ref[["df.db"]]
 	filesave <- paste0("../syn-data-",modelname,".csv")
@@ -112,7 +114,6 @@ save.and.plot <- function(ref, modelname){
 				sep = ",")
 	
 	message(paste("\n\n--> SYNTHETIC DATA SAVED IN:",filesave,"\n"))
-	
 	pdf(paste0("plot_syn-data-",modelname,".pdf"), width=22, height = 15)
 	g <- ggplot(df) + geom_step(aes(x=tb,y=inc,colour=factor(mc)),size=1)
 	g <- g + facet_wrap(~title) + scale_y_log10()
@@ -123,23 +124,7 @@ save.and.plot <- function(ref, modelname){
 save.and.plot(ref.SEmInR, "SEmInR")
 save.and.plot(ref.RESuDe, "RESuDe")
 
-# df <- ref[["df"]]
-# df.db <- ref[["df.db"]]
-# 
-# filesave <- "../syn-data.csv"
-# 
-# write.table(x = df.db, 
-# 			file = filesave, 
-# 			col.names = FALSE,
-# 			row.names = FALSE,
-# 			sep = ",")
-
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 t2 <- as.numeric(Sys.time())
 message(paste("Completed in",round((t2-t1)/60,2),"minutes"))
-
-
-
-
-
