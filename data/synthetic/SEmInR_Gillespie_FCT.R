@@ -129,7 +129,7 @@ simul.SEmInR <- function(horizon.years,# horizon of the simulation
 	
 	# Run all Monte Carlo iterations of simulations 
 	for(mc in 1:n.MC){
-		message(paste("MC",mc,"/",n.MC))
+		message(paste("SEmInR MC",mc,"/",n.MC))
 		if (!do.adaptivetau){
 			res.ATAU <- ssa.exact(init.values = x0,
 								  transitions = trans.SEmInR(nE,nI), 

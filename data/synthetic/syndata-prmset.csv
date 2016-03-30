@@ -2,3 +2,7 @@ DOLI.days, 2, 5
 R0, 1.5, 3, 6
 nE, 5
 nI, 5
+alpha, 0, 1
+kappa, 0
+GImean, 3
+GIvar, 3
