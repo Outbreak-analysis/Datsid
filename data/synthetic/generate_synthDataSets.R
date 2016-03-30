@@ -17,8 +17,7 @@ n.MC <- as.numeric(args[1])
 
 t1 <- as.numeric(Sys.time())
 
-
-pop.size <- 1E4
+pop.size <- 100000
 I.init <- 2
 horizon.years <- 1.3
 
@@ -63,7 +62,8 @@ reformat.synthetic.for.db <- function(SIM, prm, label) {
 	# the model used and its parameters
 	for(i in 1:length(prm)){
 		title <- paste(names(SIM[[i]][["param"]]),
-					   SIM[[i]][["param"]],
+					   format(SIM[[i]][["param"]],
+					   	   scientific = FALSE),
 					   sep="_", collapse = ";")
 		title <- paste0(label,"_",i,";",title)
 		tmp <- SIM[[i]][["inc"]]
