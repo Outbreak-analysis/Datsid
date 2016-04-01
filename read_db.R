@@ -22,7 +22,8 @@ get.list.sources <- function(db.path){
 get.epi.ts <- function(db.path, 
 					   country,
 					   disease,
-					   synthetic) {
+					   synthetic, 
+					   print.sql=FALSE) {
 	### Retrieve epidemic time series
 	### given country and disease
 	###
@@ -46,10 +47,9 @@ get.epi.ts <- function(db.path,
 	
 	c2 <- paste0(c12, "table_location.country='",country,"'")
 	c23 <- " AND "
-	if(is.null(country)) {
-		c2 <- ""
-		c23 <- ""
-	}
+	if(is.null(country)) c2 <- ""
+	if(is.null(country) & is.null(disease)) c23 <- ""
+		
 	
 	c3 <- paste0(c23,"table_epievent.synthetic=",synthetic)
 	c34 <- " AND "
@@ -69,7 +69,7 @@ get.epi.ts <- function(db.path,
 					 "table_epievent.disease_id=table_disease.disease_id",
 					 " AND table_location.location_id=table_epievent.location_id" ,
 					 ")")
-	sqlcmd
+	if(print.sql) print(sqlcmd)
 
 	q <- dbGetQuery(db,sqlcmd)
 	dbDisconnect(db)
@@ -78,3 +78,14 @@ get.epi.ts <- function(db.path,
 
 
 
+date.to.duration <- function(datevec){
+	### Convert date in string format to numeric duration
+	### by substracting the smallest date to all other dates.
+	
+	# converts to date
+	d <- as.Date(datevec)
+	# substract smallest date:
+	d.min <- min(d)
+	x <- d-d.min
+	return(x)
+}
