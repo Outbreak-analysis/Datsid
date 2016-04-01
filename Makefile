@@ -1,32 +1,7 @@
-# Datsid
-### Hooks for the editor to set the default target
-current: target
+default: epidata.sqlite
 
-target pngtarget pdftarget vtarget acrtarget: notarget
-
-##################################################################
-
-# make files
-
-Sources = Makefile .gitignore README.md stuff.mk LICENSE.md
-include stuff.mk
-# include $(ms)/perl.def
-
-##################################################################
-
-## Content
-
-Sources += $(wildcard *.R)
-
-######################################################################
-
-### Makestuff
-
-## Change this name to download a new version of the makestuff directory
-# Makefile: start.makestuff
-
--include $(ms)/git.mk
--include $(ms)/visual.mk
-
-# -include $(ms)/wrapR.mk
-# -include $(ms)/oldlatex.mk
+%.sqlite: ingest.R data/*.csv
+	# if %.sqlite doesn't exist, create it
+	if [ ! -e $@ ]; then sqlite3 $@ < ./sql/create_tables.sql; fi
+	# using ingest script ($<), insert into the target db ($@) all csvs which are newer than the db ($?)
+	Rscript $< $@ $?

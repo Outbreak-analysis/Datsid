@@ -1,23 +1,22 @@
-CREATE TABLE "table_disease" (
-	`disease_id`	INTEGER,
-	`disease_name`	TEXT,
-	`disease_ICD`	TEXT,
-	`disease_type`	TEXT,
-	`disease_subtype`	TEXT,
-	`disease_subtype2`	TEXT,
-	PRIMARY KEY(disease_id)
+CREATE TABLE disease (
+	id INTEGER PRIMARY KEY ASC,
+	parent_id INTEGER REFERENCES disease(id) ON DELETE CASCADE,
+	name VARCHAR(128),
+	ICD TEXT
 );
 
-CREATE TABLE "table_location" (
-	`location_id`	INTEGER,
-	`country`	TEXT,
-	`adminDiv1`	TEXT,
-	`adminDiv2`	TEXT,
-	`adminDiv3`	TEXT,
-	`adminDiv4`	TEXT,
-	`latitude`	TEXT,
-	`longitude`	TEXT,
-	PRIMARY KEY(location_id)
+CREATE TABLE disease_meta (
+	id INTEGER PRIMARY KEY ASC,
+	disease_id INTEGER REFERENCES disease(id) ON DELETE CASCADE,
+	data TEXT
+);
+
+CREATE TABLE location (
+	id INTEGER PRIMARY KEY ASC,
+	parent_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
+	name VARCHAR(128),
+	latitude DECIMAL(8,6),
+	longitude	DECIMAL(9,6)
 );
 
 CREATE TABLE "table_epievent" (
@@ -39,7 +38,14 @@ CREATE TABLE "table_epievent" (
 	FOREIGN KEY(`location_id`) REFERENCES `table_location`(`location_id`)
 );
 
-CREATE TABLE "tmp_epievent" (
+CREATE TABLE sources (
+	id INTEGER PRIMARY KEY ASC,
+	name VARCHAR(128) NOT NULL,
+	md5sum INTEGER(32)
+);
+
+CREATE TABLE epievent (
+	`epievent_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`disease_id`	INTEGER,
 	`location_id`	INTEGER,
 	`eventdate`	TEXT,
