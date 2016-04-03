@@ -6,8 +6,8 @@ get.db.name <- function(){
 	dbname <- system("ls *.db",intern = TRUE)[1]
 }
 
-db.name <- get.db.name()
-z <- get.list.existing(db.name)
+db.name.list <- get.db.name()
+z <- get.list.existing(db.name[1])
 
 shinyUI(fluidPage(
 	# Application title
@@ -16,9 +16,11 @@ shinyUI(fluidPage(
 	# Sidebar with a slider input for the number of bins
 	sidebarLayout(
 		sidebarPanel(
-			textInput("db.name",
-					  "Database used: ",
-					  value = db.name ),
+			# textInput("db.name",
+			# 		  "Database used: ",
+			# 		  value = db.name ),
+			selectInput("db.name", "Database used: ", 
+						choices = db.name.list),
 			
 			selectInput("country", "Country:", 
 						choices = c(z[["countries"]],"none")),

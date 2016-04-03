@@ -6,14 +6,14 @@ shinyServer(function(input, output) {
 	
 	output$pf <- renderPlot(
 		{
-			country <- input$country
-			disease <- input$disease
-			synthetic <- input$synthetic
-			logscale <- input$logscale
+			country    <- input$country
+			disease    <- input$disease
+			synthetic  <- input$synthetic
+			logscale   <- input$logscale
 			
-			if(country=="none") country <- NULL
-			if(disease=="none") disease <- NULL
-			if(synthetic=="none") synthetic <- NULL
+			if(country=="any") country <- NULL
+			if(disease=="any") disease <- NULL
+			if(synthetic=="any") synthetic <- NULL
 			
 			plot_data(db.name = input$db.name,
 					  country = country,

@@ -86,6 +86,6 @@ date.to.duration <- function(datevec){
 	d <- as.Date(datevec)
 	# substract smallest date:
 	d.min <- min(d)
-	x <- d-d.min
+	x <- as.numeric(d-d.min)
 	return(x)
 }
