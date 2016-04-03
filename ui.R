@@ -23,13 +23,13 @@ shinyUI(fluidPage(
 						choices = db.name.list),
 			
 			selectInput("country", "Country:", 
-						choices = c(z[["countries"]],"none")),
+						choices = c(z[["countries"]],"any")),
 			selectInput("disease", "Disease:", 
-						choices = c(z[["diseases"]],"none"),
-						selected = "none"),
+						choices = c(z[["diseases"]],"any"),
+						selected = "any"),
 			selectInput("synthetic", "Synthetic (0=real epidemic):", 
-						choices = c(z[["synthetics"]],"none"),
-						selected = "none"),
+						choices = c(z[["synthetics"]],"any"),
+						selected = "any"),
 			
 			checkboxInput("logscale",
 						  "Log scale", value=FALSE)
