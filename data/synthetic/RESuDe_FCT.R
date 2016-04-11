@@ -106,6 +106,14 @@ create.RESuDe.prm <- function(filename){
 	kappavec   <- get.syn.prm(sp,"kappa") 
 	GI_meanvec <- get.syn.prm(sp,"GImean") 
 	GI_varvec  <- get.syn.prm(sp,"GIvar") 
+	GI_varRelMeanvec  <- get.syn.prm(sp,"GIvarRelMean") # if variance specified _relative_ to mean (not just an independent value)
+	
+	n1 <- length(GI_varvec)
+	n2 <- length(GI_varRelMeanvec)
+	stopifnot(n1==0 | n2==0)
+	
+	if(n1==0) givar <- GI_varRelMeanvec
+	if(n2==0) givar <- GI_varvec
 	
 	prm <- list()
 	cnt <- 1
@@ -113,12 +121,14 @@ create.RESuDe.prm <- function(filename){
 		for(a in alphavec){
 			for(k in kappavec){
 				for(g1 in GI_meanvec){
-					for(g2 in GI_varvec){
+					for(g2 in givar){
+						gv <- g2
+						if(n1==0) gv <- g2*g1
 						prm[[cnt]] <- list(R0 = r,
 										   alpha = a,
 										   kappa = k,
 										   GImean = g1,
-										   GIvar = g2)
+										   GIvar = gv)
 						cnt <- cnt + 1
 					}
 				}
