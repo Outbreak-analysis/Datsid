@@ -77,7 +77,6 @@ trans.rate.SEmInR <- function(x, params, t){
 	return(c(inf.rate,trans.E,trans.I))
 }
 
-
 simul.SEmInR <- function(horizon.years,# horizon of the simulation 
 						 DOL.days,     # duration of latency in DAYS
 						 DOI.days,     # duration of infectiousness in DAYS

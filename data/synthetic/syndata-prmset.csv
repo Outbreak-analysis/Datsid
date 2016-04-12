@@ -1,8 +1,19 @@
-DOLI.days, 4,8,16
-R0, 1.5, 3, 6
-nE, 5
-nI, 5
-alpha, 0, 
-kappa, 0
-GImean, 3,6,12
-GIvarRelMean, 0.9
+model,R0,DOL,DOI,nE,nI,GImean,GIvar,alpha,kappa
+SEmInR,1.5,2,2,5,5,,,,
+SEmInR,1.5,4,4,5,5,,,,
+SEmInR,1.5,8,8,5,5,,,,
+SEmInR,3,2,2,5,5,,,,
+SEmInR,3,4,4,5,5,,,,
+SEmInR,3,8,8,5,5,,,,
+SEmInR,6,2,2,5,5,,,,
+SEmInR,6,4,4,5,5,,,,
+SEmInR,6,8,8,5,5,,,,
+RESuDe,1.5,,,,,3.2,3.2,0,0
+RESuDe,1.5,,,,,6.4,6.4,0,0
+RESuDe,1.5,,,,,12.8,12.8,0,0
+RESuDe,3,,,,,3.2,3.2,0,0
+RESuDe,3,,,,,6.4,6.4,0,0
+RESuDe,3,,,,,12.8,12.8,0,0
+RESuDe,6,,,,,3.2,3.2,0,0
+RESuDe,6,,,,,6.4,6.4,0,0
+RESuDe,6,,,,,12.8,12.8,0,0

@@ -1,0 +1,8 @@
+DOLI.days, 4,8,16
+R0, 1.5, 3, 6
+nE, 5
+nI, 5
+alpha, 0, 
+kappa, 0
+GImean, 3,6,12
+GIvarRelMean, 0.9
