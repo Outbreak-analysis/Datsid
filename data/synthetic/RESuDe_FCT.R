@@ -89,6 +89,32 @@ wrap.sim.RESuDe <- function(prm,prmfxd){
 	return(list(inc = df, param = prm))
 }
 
+
+create.model.prm <- function(filename, modelname){
+	
+	x0 <- read.table(filename, header=TRUE,sep=',')
+	x <- subset(x0, model==modelname)
+	
+	prm <- list()
+	for(i in 1:nrow(x)){
+		prm[[i]] <- list(R0       = x$R0[i],
+						 DOL.days = x$DOL[i],
+						 DOI.days = x$DOI[i],
+						 nE       = x$nE[i],
+						 nI       = x$nI[i],
+						 GImean   = x$GImean[i],
+						 GIvar    = x$GIvar[i],
+						 alpha    = x$alpha[i],
+						 kappa    = x$kappa[i]
+		)
+	}
+	return(prm)
+}
+
+# toto = create.model.prm('syndata-prmset2.csv',modelname = "RESuDe")
+
+
+
 create.RESuDe.prm <- function(filename){
 	
 	sp <- read.csv(filename, header=F)
@@ -137,6 +163,9 @@ create.RESuDe.prm <- function(filename){
 	}
 	return(prm)
 }
+
+
+
 
 
 test <- function(){

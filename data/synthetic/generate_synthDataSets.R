@@ -27,7 +27,8 @@ prmfxd.SEmInR <- list(horizon.years = horizon.years,
 					  I.init        = I.init,
 					  n.MC          = n.MC,
 					  remove.fizzles = TRUE)
-prm.SEmInR <- create.SEmInR.prm("syndata-prmset.csv")
+#prm.SEmInR <- create.SEmInR.prm("syndata-prmset.csv")
+prm.SEmInR <- create.model.prm("syndata-prmset2.csv",modelname = 'SEmInR')
 
 ### RESuDe parameters:
 prmfxd.RESuDe <- list(pop_size = pop.size,
@@ -35,18 +36,19 @@ prmfxd.RESuDe <- list(pop_size = pop.size,
 					  GIspan   = 20,
 					  horizon  = round(365*horizon.years,0),
 					  n.MC     = n.MC)
-prm.RESuDe <- create.RESuDe.prm(filename = "syndata-prmset.csv")
+# prm.RESuDe <- create.RESuDe.prm(filename = "syndata-prmset.csv")
+prm.RESuDe <- create.model.prm("syndata-prmset2.csv",modelname = 'RESuDe')
 
 # Run all data sets 
 
 message(paste("\n ===> Simulating",
 			  length(prm.SEmInR)*prmfxd.SEmInR[["n.MC"]],
-			  " synthetic data = ",
+			  "synthetic data = ",
 			  length(prm.SEmInR),
 			  "parameter sets x",
 			  prmfxd.SEmInR[["n.MC"]],"MC ====\n")
 )
-sfInit(parallel = F, cpu = detectCores())
+sfInit(parallel = TRUE, cpu = detectCores())
 sfLibrary(adaptivetau)
 sfLibrary(plyr)
 sfExportAll()
