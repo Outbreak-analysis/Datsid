@@ -12,3 +12,7 @@ data/syn-data.csv
 *.swp
 
 *.RData
+
+data/syn-data-RESuDe.csv
+
+data/syn-data-SEmInR.csv
