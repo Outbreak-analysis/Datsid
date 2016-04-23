@@ -1,0 +1,2 @@
+Rscript glimpse.R $1 &
+
