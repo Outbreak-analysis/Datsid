@@ -34,4 +34,5 @@ Using the database in R
 =======================
 The file `test.R` shows how an epidemic time series can simple be called from the database by refering, for example, to its country and disease name. Run `Rscript test.R` for an example.
 
+Running `glimpse abc.db` gives a summary of the data in the database `abc.db`.
 
