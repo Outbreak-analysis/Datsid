@@ -56,7 +56,7 @@ RESuDe.generate.data <- function(pop_size,
 
 wrap.sim.RESuDe <- function(prm,prmfxd){
 	
-	pop_size <- prmfxd[["pop_size"]]
+	pop_size <- prmfxd[["pop.size"]]
 	I.init <- prmfxd[["I.init"]]
 	GI_span <- prmfxd[["GIspan"]]
 	horizon <- prmfxd[["horizon"]]
@@ -67,11 +67,12 @@ wrap.sim.RESuDe <- function(prm,prmfxd){
 	kappa <- prm[["kappa"]]
 	GI_mean <- prm[["GImean"]]
 	GI_var <- prm[["GIvar"]]
+	prm[['pop.size']] <- pop_size
 	
 	df <- data.frame()
 	for(i in 1:n.MC){
 		message(paste0("RESuDe MC: ",i,"/",n.MC))
-		sim <- RESuDe.generate.data (pop_size, 
+		sim <- RESuDe.generate.data (pop.size, 
 									 I.init,
 									 R0, 
 									 alpha, 

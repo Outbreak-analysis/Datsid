@@ -31,7 +31,7 @@ prm.SEmInR <- create.model.prm("syndata-prmset.csv",
 							   modelname = 'SEmInR')
 
 ### RESuDe parameters:
-prmfxd.RESuDe <- list(pop_size = pop.size,
+prmfxd.RESuDe <- list(pop.size = pop.size,
 					  I.init   = I.init,
 					  GIspan   = 20,
 					  horizon  = round(365*horizon.years,0),
