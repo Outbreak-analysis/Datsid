@@ -7,6 +7,7 @@ source("read_db.R")
 plot_data <- function(db.name, 
 					  country = NULL, 
 					  disease = NULL, 
+					  disease_type = NULL, 
 					  synthetic = NULL,
 					  logscale = FALSE) {
 	

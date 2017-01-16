@@ -6,9 +6,11 @@ get.list.existing <- function(db.path){
 	x <- get.epi.ts(db.path,NULL,NULL,NULL)	
 	countries <- unique(x$country)
 	diseases <- unique(x$disease_name)
+	diseases_type <- unique(x$disease_type)
 	synthetics <- unique(x$synthetic)
 	return(list(countries=countries, 
 				diseases=diseases,
+				diseases_type=diseases_type,
 				synthetics=synthetics))
 }
 

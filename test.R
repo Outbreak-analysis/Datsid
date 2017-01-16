@@ -1,7 +1,7 @@
 source("read_db.R")
 
 # Build a new database:
-db.name <- "test.db"
+db.name <- "a.db"
 system(paste("./buildNewDB",db.name))
 
 # Pick an epidemic:
