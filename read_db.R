@@ -75,7 +75,13 @@ get.epi.ts <- function(db.path,
 
 	q <- dbGetQuery(db,sqlcmd)
 	dbDisconnect(db)
-	return(q)
+	
+	# Clean-up duplicated columns
+	dupl <- duplicated(names(q))
+	which(!dupl)
+	q2 <- q[,which(!dupl)]
+	
+	return(q2)
 }
 
 

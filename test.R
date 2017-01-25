@@ -1,8 +1,12 @@
 source("read_db.R")
 
-# Build a new database:
-db.name <- "a.db"
-system(paste("./buildNewDB",db.name))
+# Name of the database
+db.name <- "datsid.db"
+
+# Try to build the database if it does not exist:
+out <- system(paste('ls',db.name),intern = TRUE)
+if(length(out)==0) 
+    system(paste("./buildNewDB",db.name))
 
 # Pick an epidemic:
 country <- "RDC"
@@ -14,4 +18,7 @@ x <- get.epi.ts(db.name, country, disease, synthetic = NULL)
 # Plot the data:
 library(ggplot2)
 x$date <- as.Date(x$reportdate)
-ggplot(x) + geom_line(aes(x=date,y=count))
+x2 <- subset(x, eventtype=='incidence')
+ggplot(x2) + 
+    geom_step(aes(x=date,y=count)) +
+    ggtitle(paste(disease, country))
