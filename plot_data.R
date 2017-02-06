@@ -16,6 +16,11 @@ plot_data <- function(db.name,
 					  disease,
 					  synthetic) 
 	
+	if(!is.null(disease_type)) {
+	    disease_type2 <- disease_type
+	    dat <- subset(dat, disease_type==disease_type2)
+	}
+	
 	# Reformat before plots:
 	dat$reportdate <- as.Date(dat$reportdate)
 	dat$fullloc <- paste(dat$country,dat$adminDiv1,dat$adminDiv2)
