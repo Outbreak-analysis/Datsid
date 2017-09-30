@@ -1,8 +1,7 @@
 # Datsid
 ### Hooks for the editor to set the default target
 current: target
-
-target pngtarget pdftarget vtarget acrtarget: notarget
+-include target.mk
 
 ##################################################################
 
@@ -18,6 +17,9 @@ include stuff.mk
 
 Sources += $(wildcard *.R)
 
+build:
+	./buildNewDB xxx.db
+
 ######################################################################
 
 ### Makestuff
@@ -28,5 +30,5 @@ Sources += $(wildcard *.R)
 -include $(ms)/git.mk
 -include $(ms)/visual.mk
 
-# -include $(ms)/wrapR.mk
+-include $(ms)/wrapR.mk
 # -include $(ms)/oldlatex.mk
