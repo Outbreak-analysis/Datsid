@@ -3,7 +3,7 @@
 Overview
 ========
 This repo provides scripts that can build from scratch a SQLite database. 
-The database is built from epidemiological time series (incidence, deaths, etc.) that must be saved in the _correct format_ in the `data` folder. Information regarding the the disease itself and/or the geographical locations must be entered beforehand (in the `tables` folder) if they are new. 
+The database is built from epidemiological time series (incidence, deaths, etc.) that must be saved in the _correct format_ in the `data` folder (see data/README.md). Information regarding the the disease itself and/or the geographical locations must be entered beforehand (in the `tables` folder) if they are new. 
 
 Structure
 ========
