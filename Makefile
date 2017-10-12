@@ -22,6 +22,8 @@ xxx.db: $(wildcard tables/*) buildNewDB.sh
 	/bin/rm -f $@
 	./buildNewDB.sh xxx.db
 
+Sources += $(wildcard sql/*.sql)
+
 ## Make some plots
 # Rscript plot_data.R $1
 
