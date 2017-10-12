@@ -4,7 +4,6 @@
 
 source('_utils.R')
 
-
 # Retrieve database tables:
 # tab.dis <- get.disease.table()
 # tab.loc <- get.location.table()
@@ -15,11 +14,12 @@ dat <- read.csv(file = 'influenza-france-sentinelles-1985-2017-raw.csv',
                 na.strings = '-')
 n <- nrow(dat)
 
-
 # Reformat
 dat$date <- convert.epiweek(dat$week, format='yyyyww')
 
+print('debug-1')
 info <- df.info.file()
+print('debug-2')
 # info <- read.csv('influenza-france-sentinelles-1985-2017-info.csv', header = F); names(info)<- c('name','val')
 disease.id <- get.disease.id(disease.name = info$val[info$name=='disease_name'])
 
@@ -37,8 +37,9 @@ df$eventtype  <- 'incidence'
 df$synthetic  <- 0 
 df$source     <- 'French sentinelles network - www.sentiweb.fr'
 
-
-#write.csv(x = df, file = '')
+fname <- fname.csv.reformated()
+write.csv(x = df, file = fname, quote = F, row.names = F)
+message(paste('Data saved to',fname))
 
 if(FALSE){
     ur <- unique(dat$geo_name)
@@ -48,5 +49,3 @@ if(FALSE){
                 file='tmp.csv',
                 quote = F, row.names = F)
 }
-
-message('done')

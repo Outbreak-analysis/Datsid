@@ -41,10 +41,14 @@ create.empty.epievent.df <- function(nrow){
     return(as.data.frame(x))
 }
 
+get.current.script.name <- function(){
+    return( sub(".*=", "", commandArgs()[4]) )
+}
+
 #' Retrieve companion info file ending with '-info'
 df.info.file <- function(){
-    sname <- sub(".*=", "", commandArgs()[4])
-    print(sname)
+    
+    sname <- get.current.script.name()
     info.file <- gsub(pattern = '-reformat.R', replacement = '-info.csv',
                       x = sname, fixed = TRUE)
     if(info.file==sname){
@@ -101,4 +105,13 @@ get.location.id <- function(country, adminDiv1) {
     
     z <- left_join(y,x,"key")
     return(z$location_id)
+}
+
+
+fname.csv.reformated <- function(){
+    sname <- get.current.script.name()
+    fname <- gsub(pattern = '-reformat.R', 
+                  replacement = '.csv',
+                  x = sname)
+    return(fname)
 }
