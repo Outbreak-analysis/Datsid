@@ -1,18 +1,20 @@
-
-*.pdf
+commit.time
+local.mk
+make.log
+target.mk
 
 .Rhistory
+.*.Rlog
+.*.wrapR.*
+*.wrapR.*
+*.Rout
+*.RData
 
-*.db
-
+*.pdf
 *.db
 
 data/syn-data.csv
-
-*.swp
-
-*.RData
-
 data/syn-data-RESuDe.csv
-
 data/syn-data-SEmInR.csv
+
+*.sw*
