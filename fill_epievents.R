@@ -1,7 +1,6 @@
 library(DBI)
 library(RSQLite)
 
-
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args)<1) stop("Not enough arguments!")
 db.name <- args[1]

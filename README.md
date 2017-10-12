@@ -7,8 +7,16 @@ The database is built from epidemiological time series (incidence, deaths, etc.)
 
 Structure
 ========
- * `data` folder contains the `.csv` files containing the epidemiological data that populates the database. Note there are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`. The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data.  The `csv` files should not have headers. There should be one column corresponding to each column in the SQL table (except for the first column which consists of unique IDs).
- * `tables` folder specifying the SQL tables.
+
+* `data` folder contains the `.csv` files containing the epidemiological data that populates the database.
+	* There are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`.
+	* The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data.
+	* The `csv` files should not have headers. There should be one column corresponding to each column in the SQL table (except for the first column which consists of unique IDs).
+* `tables` folder with static tables (describing diseases, locations, etc.)
+
+__TODO__:
+* Figure out how to use (and check?) table headers
+* Incorporate this into make, or otherwise make transparent
   
 See the `documentation` folder for the database diagram.
 

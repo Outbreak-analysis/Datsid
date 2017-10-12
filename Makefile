@@ -17,8 +17,19 @@ include stuff.mk
 
 Sources += $(wildcard *.R)
 
-build:
-	./buildNewDB xxx.db
+Sources += buildNewDB.sh
+xxx.db: $(wildcard tables/*) buildNewDB.sh
+	/bin/rm -f $@
+	./buildNewDB.sh xxx.db
+
+## Make some plots
+# Rscript plot_data.R $1
+
+test:
+	Rscript test.R
+
+check:
+	Rscript glimpse.R xxx.db
 
 ######################################################################
 
