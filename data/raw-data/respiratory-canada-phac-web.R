@@ -9,6 +9,7 @@ library(ggplot2)
 t0 <- as.numeric(Sys.time())
 
 read_web_phac <- function(year.start) {
+    message(paste('read_web_phac:',year.start))
     # Retrieve URL:
     url_root <- 'https://www.canada.ca/en/public-health/services/surveillance/respiratory-virus-detections-canada/'
     url0 <- paste0(url_root, year.start, '-', year.start+1, '.html')

@@ -7,3 +7,7 @@ RSV_test, disease_ICD, B97.4
 RSV_test, eventtype, n_tested
 RSV_pos, disease_ICD, B97.4
 RSV_pos, eventtype, n_positive
+Rhino_test, disease_name, rhinovirus
+Rhino_test, eventtype, n_tested
+Rhino_pos, disease_name, rhinovirus
+Rhino_pos, eventtype, n_positive
