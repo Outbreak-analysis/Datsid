@@ -4,10 +4,6 @@
 
 source('_utils.R')
 
-# Retrieve database tables:
-# tab.dis <- get.disease.table()
-# tab.loc <- get.location.table()
-
 # Retrieve raw data:
 dat <- read.csv(file = 'influenza-france-sentinelles-1985-2017-raw.csv', 
                 comment.char = '#', 
@@ -16,16 +12,10 @@ n <- nrow(dat)
 
 # Reformat
 dat$date <- convert.epiweek(dat$week, format='yyyyww')
-
-print('debug-1')
 info <- df.info.file()
-print('debug-2')
-# info <- read.csv('influenza-france-sentinelles-1985-2017-info.csv', header = F); names(info)<- c('name','val')
 disease.id <- get.disease.id(disease.name = info$val[info$name=='disease_name'])
-
-loc.id <- get.location.id(country = rep('FRANCE',n), 
-                          adminDiv1 = dat$geo_name)
-
+loc.id     <- get.location.id(country = rep('FRANCE',n), 
+                              adminDiv1 = dat$geo_name)
 
 # Create data frame for epievent table
 df <- create.empty.epievent.df(n)

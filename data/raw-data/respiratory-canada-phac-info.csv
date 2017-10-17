@@ -1,0 +1,9 @@
+name,db_name, db_val
+Adeno_test, disease_ICD, B34.0
+Adeno_test, eventtype, n_tested
+Adeno_pos, disease_ICD, B34.0
+Adeno_pos, eventtype, n_positive
+RSV_test, disease_ICD, B97.4
+RSV_test, eventtype, n_tested
+RSV_pos, disease_ICD, B97.4
+RSV_pos, eventtype, n_positive

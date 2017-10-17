@@ -91,8 +91,29 @@ get.disease.id <- function(disease.name){
     return(res)
 }
 
-# country = rep('FRANCE',n)
-# adminDiv1 <- as.character(dat$geo_name)
+get.disease.id.icd <- function(disease.icd){
+    res <- NA
+    dn <- trimws(as.character(disease.icd))
+    tab.dis <- get.disease.table() %>%
+        filter(disease_ICD==dn)
+    tab.dis[tab.dis==''] <- NA
+    if(nrow(tab.dis)==0){
+        message(paste('Disease ICD <', dn,'> not found!'))
+        stop()
+    }
+    if(nrow(tab.dis)==1){
+        res <- tab.dis$disease_id
+    }
+    if(nrow(tab.dis) > 1){
+        # if there is more than one match,
+        # take the less informative disease description
+        tmp <- apply(X = tab.dis, MARGIN = 2, FUN = is.na)
+        idx <- which.max(apply(tmp, 1, sum))
+        res <- tab.dis$disease_id[idx]
+    }
+    return(res)
+}
+
 
 get.location.id <- function(country, adminDiv1) {
     
@@ -106,7 +127,6 @@ get.location.id <- function(country, adminDiv1) {
     z <- left_join(y,x,"key")
     return(z$location_id)
 }
-
 
 fname.csv.reformated <- function(){
     sname <- get.current.script.name()
