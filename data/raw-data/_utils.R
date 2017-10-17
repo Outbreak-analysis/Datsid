@@ -55,7 +55,10 @@ df.info.file <- function(){
         message('Problem while building info file name.')
         stop()
     }
-    info <- read.csv(info.file, header = FALSE)
+    info <- read.csv(info.file, 
+                     header = FALSE,
+                     stringsAsFactors = F,
+                     strip.white = T)
     names(info) <- c('name','val')
     return(info)
 }
