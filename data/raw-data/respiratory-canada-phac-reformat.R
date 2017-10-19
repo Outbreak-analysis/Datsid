@@ -5,6 +5,73 @@ source('_utils.R')
 load(file = 'resp-canada.RData')
 n <- nrow(dat)
 
+# Load dictionary for this data set:
+dic.dis <- read.csv('respiratory-canada-phac-dictionary.csv', 
+                stringsAsFactors=F, strip.white = T)
+
+dic.loc <- read.csv('respiratory-canada-phac-dictionary-location.csv', 
+                    stringsAsFactors=F, strip.white = T)
+
+# remove French characters:
+dat$regions     <- anglicize(dat$regions)
+dic.loc$regions <- anglicize(dic.loc$regions)
+dic.loc$location_name <- anglicize(dic.loc$location_name)
+
+# Retrieve database tables:
+tab.dis <- get.disease.table() %>% 
+    create.disease.key()
+tab.loc <- get.location.table() %>%
+    create.location.key()
+tab.loc$regions <- tab.loc$location_name
+
+# Identify location and disease IDs:
+
+df.tmp <- left_join(dat, dic.dis, by='type') %>%
+    create.disease.key() %>%
+    left_join(tab.dis, by='key') %>%
+    # location:
+    left_join(dic.loc, by='regions') %>%
+    create.location.key() %>%
+    left_join(tab.loc, by='key')
+
+
+# Create data frame for epievent table
+df <- create.empty.epievent.df(n)
+
+df$disease_id <- df.tmp$disease_id
+df$location_id<- df.tmp$location_id
+df$reportdate <- df.tmp$date
+df$count      <- df.tmp$count
+df$eventtype  <- df.tmp$eventtype
+df$synthetic  <- 0 
+df$source     <- 'PHAC web'
+
+str(df)
+
+fname <- fname.csv.reformated()
+write.csv(x = df, file = fname, quote = F, row.names = F)
+message(paste('Data saved to',fname))
+
+
+# 
+# STOPPED HERE:
+# problem, 'a' has more rows than 'dat' after join:
+a <- inner_join(dat, dic.dis, by='type') %>%
+    create.disease.key() 
+
+a2 <- left_join(a, tab.dis, by='key')
+a3 <- left_join(a2, dic.loc, by='regions') %>%
+    create.location.key()
+a4 <- left_join(a3, tab.loc, by='key')
+bb <- a4[is.na(a4$location_id),]
+unique(bb$regions.x)
+
+
+
+
+stop()
+
+# -----
 info <- read.csv('respiratory-canada-phac-info.csv', 
                      stringsAsFactors = F,strip.white = T)
 
@@ -34,19 +101,4 @@ tmp.ev <- info[info$db_name=='eventtype',]
 tmp.ev$type <- tmp.ev$name
 evt <- unlist(left_join(dat, tmp.ev, by='type')$db_val)
 
-# Create data frame for epievent table
-df <- create.empty.epievent.df(n)
 
-df$disease_id <- disease_id
-df$location_id <- loc.id
-df$reportdate <- dat$date
-df$count      <- dat$count
-df$eventtype  <- evt
-df$synthetic  <- 0 
-df$source     <- 'PHAC web'
-
-str(df)
-
-fname <- fname.csv.reformated()
-write.csv(x = df, file = fname, quote = F, row.names = F)
-message(paste('Data saved to',fname))

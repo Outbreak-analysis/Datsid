@@ -1,0 +1,59 @@
+regions,country,subcountry, location_name
+Newfoundland,CA,NL,Newfoundland and Labrador
+Prince Edward Island,CA,PE,Prince Edward Island
+Nova Scotia,CA,NS,Nova Scotia
+New Brunswick,CA,NB,New Brunswick
+Atlantic,CA,,Canada-Atlantic
+Région Nord-Est,CA,QC,Nord Est du Quebec
+Québec-Chaudière-Appalaches,CA,QC,Québec-Chaudière-Appalaches
+Centre-du-Québec,CA,QC,Centre-du-Québec
+Montréal-Laval,CA,QC,Montreal
+Ouest du Québec,CA,QC,Ouest du Québec
+Montérégie,CA,QC,Montérégie
+Québec,CA,QC,Québec ville
+Ottawa P.H.L.,CA,ON,Ottawa
+CHEO - Ottawa,CA,ON,Ottawa
+Kingston,CA,ON,Kingston
+Toronto Medical Laboratory,CA,ON,Toronto
+C.P.H.L. - Toronto,CA,ON,Toronto
+Sick Kids' Hospital - Toronto,CA,ON,Toronto
+Sunnybrook & Women's College HSC,CA,ON,Toronto
+Sault Ste. Marie,CA,ON,Sault Ste. Marie
+Timmins,CA,ON,Timmins
+St. Joseph's - London,CA,ON,London
+London P.H.L.,CA,ON,London
+Orillia P.H.L.,CA,ON,Orillia
+Thunder Bay,CA,ON,Thunder Bay
+Sudbury P.H.L.,CA,ON,Sudbury
+Hamilton P.H.L.,CA,ON,Hamilton
+Peterborough P.H.L.,CA,ON,Peterborough
+Ontario,CA,ON,Ontario
+Manitoba,CA,MB,Manitoba
+Regina,CA,SK,Regina
+Saskatoon,CA,SK,Saskatoon
+Saskatchewan,CA,SK,Saskatchewan
+Alberta,CA,AB,Alberta
+Prairies,CA,,Canada-Prairies
+British Columbia,CA,BC,British Columbia
+CANADA,CA,,Canada
+Province of Québec,CA,QC,Quebec
+Kingston P.H.L.,CA,ON,Kingston
+P.H.O.L. - Toronto,CA,ON,Toronto
+Sick Kids'Hospital - Toronto,CA,ON,Toronto
+Sault Ste. Marie P.H.L.,CA,ON,Sault Ste. Marie
+Timmins P.H.L.,CA,ON,Timmins
+Thunder Bay P.H.L.,CA,ON,Thunder Bay
+Province of Ontario,CA,ON,Ontario
+Province of Saskatchewan,CA,SK,Saskatchewan
+Province of Alberta,CA,AB,Alberta
+CHEO/HEE0 - Ottawa,CA,ON,Ottawa
+P.H.O.L - Toronto,CA,ON,Ontario
+Yukon,CA,YT,Yukon
+Northwest Territories,CA,NT,Northwest Territories
+Nunavut,CA,NU,Nunavut
+Territories/territoires,CA,,Canada-Territories
+Territories*,CA,,Canada-Territories
+UHN / Mount Sinai Hospital,CA,ON,Toronto
+Territories,CA,,Canada-Territories
+UHN/Mount Sinai Hospital,CA,ON,Toronto
+Province of,CA,,Canada

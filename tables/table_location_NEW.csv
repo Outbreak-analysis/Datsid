@@ -1,0 +1,38 @@
+location_id,country,subcountry,location_name
+1,CA,,Canada
+2,CA,AB,Alberta
+3,CA,BC,British Columbia
+4,CA,MB,Manitoba
+5,CA,NB,New Brunswick
+6,CA,NL,Newfoundland and Labrador
+7,CA,NS,Nova Scotia
+8,CA,ON,Ontario
+9,CA,PE,Prince Edward Island
+10,CA,QC,Quebec
+11,CA,SK,Saskatchewan
+12,CA,NT,Northwest Territories
+13,CA,NU,Nunavut
+14,CA,YT,Yukon
+15,CA,, Canada-Prairies
+16,CA,,Canada-Atlantic
+17,CA,,Canada-Territories
+18,CA,QC,Centre-du-Quebec
+19,CA,ON,Hamilton
+20,CA,ON,Kingston
+21,CA,ON,London
+22,CA,QC,Monteregie
+23,CA,QC,Montreal
+24,CA,QC,Nord Est du Quebec
+25,CA,ON,Orillia
+26,CA,ON,Ottawa
+27,CA,QC,Ouest du Quebec
+28,CA,ON,Peterborough
+29,CA,QC,Quebec ville
+30,CA,QC,Quebec-Chaudiere-Appalaches
+31,CA,SK,Regina
+32,CA,SK,Saskatoon
+33,CA,ON,Sault Ste. Marie
+34,CA,ON,Sudbury
+35,CA,ON,Thunder Bay
+36,CA,ON,Timmins
+37,CA,ON,Toronto

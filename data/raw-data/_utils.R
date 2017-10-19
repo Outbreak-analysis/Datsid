@@ -64,11 +64,15 @@ df.info.file <- function(){
 }
 
 get.disease.table <- function(){
-    read.csv(file = '../../tables/table_disease.csv')
+    read.csv(file = '../../tables/table_disease.csv',
+             stringsAsFactors = F,
+             strip.white = T)
 }
 
 get.location.table <- function(){
-    read.csv(file = '../../tables/table_location.csv')
+    read.csv(file = '../../tables/table_location.csv',
+             stringsAsFactors = F,
+             strip.white = T)
 }
 
 get.disease.id <- function(disease.name){
@@ -138,3 +142,29 @@ fname.csv.reformated <- function(){
                   x = sname)
     return(fname)
 }
+
+create.disease.key <- function(df){
+    df$key <- with(df, paste(disease_name, 
+                             disease_type,
+                             disease_subtype,
+                             disease_subtype2,
+                             sep='_'))
+    return(df)
+}
+
+create.location.key <- function(df){
+    df$key <- with(df, paste(country, 
+                             subcountry,
+                             location_name,
+                             sep='_'))
+    return(df)
+}
+
+
+anglicize <- function(x){
+    x <- gsub(x = x, pattern = 'é',replacement = 'e',fixed = TRUE)
+    x <- gsub(x = x, pattern = 'è',replacement = 'e',fixed = TRUE)
+    return(x)
+}
+
+
