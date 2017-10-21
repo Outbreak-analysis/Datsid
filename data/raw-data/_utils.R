@@ -138,7 +138,7 @@ get.location.id <- function(country, adminDiv1) {
 fname.csv.reformated <- function(){
     sname <- get.current.script.name()
     fname <- gsub(pattern = '-reformat.R', 
-                  replacement = '.csv',
+                  replacement = '-db.csv',
                   x = sname)
     return(fname)
 }
