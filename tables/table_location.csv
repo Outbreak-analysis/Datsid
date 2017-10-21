@@ -13,7 +13,7 @@ location_id,country,subcountry,location_name
 12,CA,NT,Northwest Territories
 13,CA,NU,Nunavut
 14,CA,YT,Yukon
-15,CA,, Canada-Prairies
+15,CA,,Canada-Prairies
 16,CA,,Canada-Atlantic
 17,CA,,Canada-Territories
 18,CA,QC,Centre-du-Quebec
@@ -36,3 +36,125 @@ location_id,country,subcountry,location_name
 35,CA,ON,Thunder Bay
 36,CA,ON,Timmins
 37,CA,ON,Toronto
+38,MX,,Mexico
+39,MX,VER,Perote
+40,US,,United States
+41,HT,,Haiti
+42,GB,,United Kingdom
+43,AU,,Australia
+44,CD,,Democratic Republic of Congo
+45,LR,,Liberia
+46,KR,,South Korea
+47,GB,LDN,London
+48,GB,BST,Bristol
+49,GB,LIV,Liverpool
+50,GB,MAN,Manchester
+51,GB,NET,Newcastle
+52,GB,BIR,Birmingham
+53,GB,SHF,Sheffield
+54,SL,,Sierra Leone
+55,GN,,Guinea
+56,FR,A,Alsace
+57,FR,B,Aquitaine
+58,FR,C,Auvergne
+59,FR,P,Basse-Normandie
+60,FR,D,Bourgogne
+61,FR,E,Bretagne
+62,FR,F,Centre
+63,FR,G,Champagne-Ardenne
+64,FR,H,Corse
+65,FR,I,Franche-Comte
+66,FR,Q,Haute-Normandie
+67,FR,K,Languedoc-Roussillon
+68,FR,L,Limousin
+69,FR,M,Lorraine
+70,FR,N,Midi-Pyrenees
+71,FR,O,Nord-Pas-de-Calais
+72,FR,R,Pays de la Loire
+73,FR,S,Picardie
+74,FR,T,Poitou-Charentes
+75,FR,U,Provence-Alpes-Cote d'Azur
+76,FR,J,Ile-de-France
+77,FR,V,Rhone-Alpes
+78,LR,BM,Tubmanburg
+79,LR,BG,Gbarnga
+80,LR,GP,Bopolu
+81,LR,GP,Bopulu
+82,LR,GB,Buchanan
+83,LR,CM,Robertsport
+84,LR,GG,Zwedru
+85,LR,GK,Barclayville
+86,LR,LO,Voinjama
+87,LR,MG,Kakata
+88,LR,MY,Harper
+89,LR,MO,Bensonville
+90,LR,NI,Sanniquellie
+91,LR,RI,Rivercess
+92,LR,RG,Fish Town
+93,LR,SI,Greenville
+94,LR,LO,Foya
+95,LR,MO,Monrovia
+96,LR,NI,Ganta
+97,LR,RI,River Cess Town
+98,LR,BM,Bomi
+99,LR,BG,Bong
+100,LR,GP,Gbarpolu
+101,LR,GB,Grand Bassa
+102,LR,CM,Grand Cape Mount
+103,LR,GG,Grand Gedeh
+104,LR,GK,Grand Kru
+105,LR,LO,Lofa
+106,LR,MG,Margibi
+107,LR,MY,Maryland
+108,LR,MO,Montserrado
+109,LR,NI,Nimba
+110,LR,RI,RiverCess
+111,LR,RG,River Gee
+112,LR,SI,Sinoe
+113,GN,N,Beyla
+114,GN,B,Boffa
+115,GN,B,Boke
+116,GN,C,Conakry
+117,GN,D,Coyah
+118,GN,F,Dabola
+119,GN,M,Dalaba
+120,GN,F,Dinguiraye
+121,GN,D,Dubreka
+122,GN,F,Faranah
+123,GN,D,Forecariah
+124,GN,B,Fria
+125,GN,B,Gaoual
+126,GN,N,Gueckedou
+127,GN,K,Kankan
+128,GN,K,Kerouane
+129,GN,D,Kindia
+130,GN,F,Kissidougou
+131,GN,L,Koubia
+132,GN,B,Koundara
+133,GN,K,Kouroussa
+134,GN,L,Labe
+135,GN,L,Lelouma
+136,GN,N,Lola
+137,GN,N,Macenta
+138,GN,L,Mali
+139,GN,M,Mamou
+140,GN,N,Nzerekore
+141,GN,M,Pita
+142,GN,K,Siguiri
+143,GN,D,Telimele
+144,GN,L,Tougue
+145,GN,N,Yomou
+146,SL,S,Bo
+147,SL,N,Makeni
+148,SL,S,Bonthe
+149,SL,W,Freetown
+150,SL,E,Kailahun
+151,SL,N,Kambia
+152,SL,E,Kenema
+153,SL,N,Kabala
+154,SL,E,Koidu
+155,SL,S,Moyamba
+156,SL,N,Port Loko
+157,SL,S,Pujehun
+158,SL,N,Magburaka
+159,SL,W,Waterloo
