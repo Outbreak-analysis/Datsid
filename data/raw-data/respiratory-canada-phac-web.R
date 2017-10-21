@@ -72,23 +72,6 @@ dat <- do.call('rbind', dat.yr)
 
 dat$type <- gsub(pattern = '\n', replacement = '', x = dat$type, fixed = TRUE)
 
-# write.table(x = unique(dat$type), file='tmp.csv', row.names = F, sep = ',', quote = F)
-# dic <- read.csv('respiratory-canada-phac-dictionary.csv')
-# # Clean-up data type
-# # (e.g., 'Flu Test', 'FluTest', 'Flu\nTest')
-# dat$type <- gsub(pattern = ' ', replacement = '', x = dat$type, fixed = TRUE)
-# 
-# dat$type <- gsub(pattern = 'R.S.V.', replacement = 'RSV', x = dat$type, fixed = TRUE)
-# dat$type <- gsub(pattern = 'Test', replacement = '_test', x = dat$type, fixed = TRUE)
-# dat$type <- gsub(pattern = 'Pos', replacement = '_pos', x = dat$type, fixed = TRUE)
-# dat$type <- gsub(pattern = 'pos.', replacement = 'pos', x = dat$type, fixed = TRUE)
-# 
-# dat$type <- gsub(pattern = 'A_pos(all)', replacement = 'Aall_pos', x = dat$type, fixed = TRUE)
-# dat$type <- gsub(pattern = '(UnS)', replacement = '(Uns)', x = dat$type, fixed = TRUE)
-# dat$type <- gsub(pattern = 'A(H1N1)pdm09', replacement = 'AH1N1pdm09', x = dat$type, fixed = TRUE)
-# dat$type <- gsub(pattern = 'H1N1(2009)', replacement = 'AH1N1pdm09', x = dat$type, fixed = TRUE)
-# unique(dat$type)
-# length(unique(dat$type))
 
 # Save for downstream use:  
 save(list='dat', file='resp-canada.RData')

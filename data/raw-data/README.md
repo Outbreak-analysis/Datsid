@@ -3,7 +3,7 @@ Conventions
 * -raw.csv for downloaded data
 * -info.csv is human-readable metadata (but complicated)
 * -reformat.R converts input csvs to final version:
-	* .csv
+	* -db.csv
 
 influenza-france-sentinelles-1985-2017-raw.csv downloaded Oct 2017. 
 * Approximate URL is in the header. Haven’t figured out yet how to download automatically, may require posting or something.
