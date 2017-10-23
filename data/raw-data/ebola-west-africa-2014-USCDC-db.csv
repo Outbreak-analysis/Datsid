@@ -1,4 +1,4 @@
-location_id,eventdate,reportdate,count,eventtype,eventtype2,ageMin,ageMax,gender,socialstruct,synthetic,source
+location_id,eventdate,reportdate,count,eventtype,eventtype2,agemin,agemax,gender,socialstruct,synthetic,source
 55,NA,2014-03-01,0,incidence,NA,NA,NA,NA,NA,0,US CDC
 55,NA,2014-03-02,0,incidence,NA,NA,NA,NA,NA,0,US CDC
 55,NA,2014-03-03,0,incidence,NA,NA,NA,NA,NA,0,US CDC

@@ -4,6 +4,9 @@ cd $(dirname $0)
 ## Check tables
 Rscript table_checks.R
 
+## Download & reformat data for tables
+./data/raw-data/create-data-for-db.sh
+
 ## Make the database structure
 sqlite3 $1 < ./sql/create_tables.sql
 

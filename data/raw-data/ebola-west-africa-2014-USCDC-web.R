@@ -15,7 +15,6 @@ download.file(url = url, destfile = xls.name)
 dat <- read_excel(xls.name)
 
 
-
 # Create the '-raw.csv' file
 
 nm <- names(dat)
@@ -28,10 +27,11 @@ for(k in 2:nc){
   names(dat)[ncol(dat)] <- gsub('Total','incidence',names(dat)[k])
 }
 
-
 dat <- dat %>%
   gather('var','val',2:ncol(dat)) %>%
   filter(grepl('incidence',var))
+# Get rid of the comma, as it confuses with a new column in csv format:
+dat$var <- gsub(',','--',x = dat$var, fixed = TRUE)
 
 # Save for downstream use:  
 save(list='dat', file='ebola-west-africa.RData')

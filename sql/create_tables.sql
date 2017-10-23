@@ -11,12 +11,8 @@ CREATE TABLE "table_disease" (
 CREATE TABLE "table_location" (
 	`location_id`	INTEGER,
 	`country`	TEXT,
-	`adminDiv1`	TEXT,
-	`adminDiv2`	TEXT,
-	`adminDiv3`	TEXT,
-	`adminDiv4`	TEXT,
-	`latitude`	TEXT,
-	`longitude`	TEXT,
+	`subcountry`	TEXT,
+	`location_name`	TEXT,
 	PRIMARY KEY(location_id)
 );
 

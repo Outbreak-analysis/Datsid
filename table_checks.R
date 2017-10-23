@@ -40,23 +40,11 @@ check.unique.id('location', table = loc, id = 'location_id')
 
 # checks for duplicates entries:
 loc$key <- paste(loc$country,
-                 loc$adminDiv1,
-                 loc$adminDiv2,
-                 loc$adminDiv3,
-                 loc$adminDiv4,
+                 loc$subcountry,
+                 loc$location_name,
                  sep='_')
 check.duplicate(loc$key, 'location')
 
-# check duplicated coordinates:
-loc$keygeo <- with(loc, paste(round(latitude,5),
-                              round(longitude,5),
-                              sep='_'))
-# if no coordinated entered, 
-# set to a unique value such that it's not flagged as duplicated:
-idx <- which(loc$keygeo=='NA_NA')
-loc$keygeo[idx] <- 1:length(idx)
-
-check.duplicate(loc$keygeo, 'location (coordinates only)')
 
 # ---- Diseases ----
 

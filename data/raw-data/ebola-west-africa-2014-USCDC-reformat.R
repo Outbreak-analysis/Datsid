@@ -1,8 +1,6 @@
 source('_utils.R')
 
-
-
-dat <- read.csv('ebola-west-africa-2014-USCDC-raw.csv')
+dat     <- read.csv('ebola-west-africa-2014-USCDC-raw.csv')
 dat$var <- as.character(dat$var)
 
 # Retrieve database tables:

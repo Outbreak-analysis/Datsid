@@ -1,4 +1,4 @@
-disease_id,location_id,eventdate,reportdate,count,eventtype,eventtype2,ageMin,ageMax,gender,socialstruct,synthetic,source
+disease_id,location_id,eventdate,reportdate,count,eventtype,eventtype2,agemin,agemax,gender,socialstruct,synthetic,source
 6,NA,NA,2017-10-08,449,incidence,NA,NA,NA,NA,NA,0,French sentinelles network - www.sentiweb.fr
 6,NA,NA,2017-10-08,0,incidence,NA,NA,NA,NA,NA,0,French sentinelles network - www.sentiweb.fr
 6,NA,NA,2017-10-08,73,incidence,NA,NA,NA,NA,NA,0,French sentinelles network - www.sentiweb.fr
