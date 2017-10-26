@@ -70,8 +70,10 @@ years.start <- c(2013:2016)
 dat.yr <- lapply(years.start, read_web_phac)
 dat <- do.call('rbind', dat.yr)
 
+# Remove annoying characters:
 dat$type <- gsub(pattern = '\n', replacement = '', x = dat$type, fixed = TRUE)
-
+dat$type <- trimws(dat$type)
+dat$type <- enc2utf8(dat$type)
 
 # Save for downstream use:  
 save(list='dat', file='resp-canada.RData')

@@ -13,7 +13,10 @@ disease_id,disease_name,disease_ICD,disease_type,disease_subtype,disease_subtype
 11,adenovirus,B34.0,,,
 12,coronavirus,B34.2,,,
 13,HumanMetapneumovirus,B97.81,,,
-14,parainfluenza,B34.8,,,
+14,parainfluenza,J12.2,,,
 15,rhinovirus,B34.8,,,
 16,RSV,B97.4,,,
-
+17,parainfluenza,J12.2,1,,
+18,parainfluenza,J12.2,2,,
+19,parainfluenza,J12.2,3,,
+20,parainfluenza,J12.2,4,,
