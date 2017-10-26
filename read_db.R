@@ -1,6 +1,6 @@
 library(DBI)
 library(RSQLite)
-
+library(dplyr)
 
 get.list.existing <- function(db.path){
 	x <- get.epi.ts(db.path,NULL,NULL,NULL)	
@@ -19,6 +19,82 @@ get.list.sources <- function(db.path){
 	x <- get.epi.ts(db.path,NULL,NULL,NULL)	
 	return(unique(x$source))
 }
+
+#' Returns the full database joining the tables: 
+#' - table_epievent
+#' - table_location
+#' - table_disease
+#' 
+get.joined.tables <- function(db.path){
+    db <- dbConnect(SQLite(), dbname = db.path)
+    
+    tab.epi <- dbGetQuery(conn = db, 
+                          statement = 'SELECT DISTINCT *
+                          FROM table_epievent')
+    tab.loc <- dbGetQuery(conn = db, 
+                          statement = 'SELECT DISTINCT *
+                          FROM table_location')
+    tab.dis <- dbGetQuery(conn = db, 
+                          statement = 'SELECT DISTINCT *
+                          FROM table_disease')
+    dbDisconnect(db)
+    
+    dat <- tab.epi %>% 
+        left_join(tab.loc, by='location_id') %>%
+        left_join(tab.dis, by='disease_id')
+    
+    return(dat)
+}
+
+
+get.epi.ts.NEW <- function(db.path, 
+                           country.ISO3166,
+                           location.name,
+                           disease.name,
+                           disease.type='',
+                           disease.subtype='',
+                           synthetic=0,
+                           do.plot = FALSE) {
+    # DEBUG:
+    # country.ISO3166='FR' ; location.name='Centre' ; disease.name='influenza'
+    
+    x <- get.joined.tables(db.path) %>%
+        filter(country == country.ISO3166) %>%
+        filter(location_name == location.name) %>%
+        filter(disease_name == disease.name)
+    
+    # Converts dates in R Data format:
+    x$reportdate <- as.Date(x$reportdate, format = '%Y-%m-%d')
+    x$eventdate  <- as.Date(x$eventdate, format = '%Y-%m-%d')
+    
+    # Plot (if requested):
+    if(do.plot){
+    plot(x= x$reportdate, y=x$count, typ='o',cex=0.5,
+         main = paste(country.ISO3166,
+                      location.name,
+                      disease.name,
+                      disease.type,
+                      disease.subtype, collapse = ' '))
+        grid()
+}
+    return(x)
+}
+
+#' Select a subset of an epidemic time series based on dates
+#' @param epi.ts Dataframe, typically returned from function \code{get.epi.ts.NEW}.
+#' @param reportdate.min String. Minimum date yyyy-mm-dd
+#' @param reportdate.max String. Maximum date yyyy-mm-dd
+#' 
+subset.date.epi.ts <- function(epi.ts, reportdate.min, reportdate.max) {
+    x <- epi.ts %>%
+        filter(reportdate.min <= reportdate & reportdate <= reportdate.max)
+    return(x)
+}
+
+
+
+
+
 
 
 get.epi.ts <- function(db.path, 
