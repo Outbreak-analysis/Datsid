@@ -7,8 +7,10 @@ dat$var <- as.character(dat$var)
 tab.dis <- get.disease.table() 
 tab.loc <- get.location.table() %>% create.location.key()
 
+# Disease id:
 idx.dis <- which(tab.dis$disease_name=='ebola')
 disease_id <- tab.dis$disease_id[idx.dis]
+dat$disease_id <- disease_id
 
 # Retrieve country names:
 sep = '--'

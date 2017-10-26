@@ -63,3 +63,9 @@ dis$key <- with(dis,
 check.duplicate(keys = dis$key, table.name = 'disease')
 
 
+
+message('\n ===> table_location and table_disease checked.\n')
+
+
+
+

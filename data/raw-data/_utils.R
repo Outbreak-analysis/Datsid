@@ -122,14 +122,17 @@ get.disease.id.icd <- function(disease.icd){
 }
 
 
-get.location.id <- function(country, adminDiv1) {
+get.location.id <- function(country, location_name) {
     
     # What is asked:
-    y <- data.frame(key=paste(country,adminDiv1,sep='_'))
+    y <- data.frame(key=paste(country,
+                              toupper(location_name),
+                              sep='_'), 
+                    stringsAsFactors = F)
     
     # From the table:
     x <- get.location.table()
-    x$key <- paste(x$country, x$adminDiv1, sep='_')
+    x$key <- paste(x$country, toupper(x$location_name), sep='_')
     
     z <- left_join(y,x,"key")
     return(z$location_id)

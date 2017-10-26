@@ -6,7 +6,7 @@ if (length(args)<1) stop("Not enough arguments!")
 db.name <- args[1]
  # db.name <- "abc.db"
 
-csvlist <- system("ls ./data/*.csv",intern = TRUE)
+csvlist <- system("ls ./data/*-db.csv",intern = TRUE)
 
 # Connect to the database
 db = dbConnect(SQLite(), dbname=db.name)
@@ -21,7 +21,8 @@ check.dis <- dbWriteTable(db,"table_disease", table.disease, append=TRUE)
 success <- (check.loc & check.dis)
 
 if(success){
-  message('Tables for location and diseases successfully added to database')
+  message(paste('\n ==> table_location and table_disease successfully added to database\n ',
+                db.name))
 }
 if(!success){
   message('Cannot add tables to database... ABORTING!')
@@ -41,12 +42,22 @@ for(i in 1:length(csvlist)){
 }
 
 # write data in final table:
-field.names <- dbListFields(db, "tmp_epievent")
-field.names2 <- paste(field.names,collapse = ",")
+field.names <- paste( dbListFields(db, "tmp_epievent"), 
+                      collapse = ",")
 q <- paste0("INSERT INTO table_epievent(",
-			field.names2,
+			field.names,
 			") SELECT * FROM tmp_epievent;")
 dbSendQuery(db,q)
+
+check.epievent <- dbGetQuery(db,'SELECT * FROM table_epievent')
+nc <- nrow(check.epievent)
+if(nc==0) {
+  message(' ERROR: something went wrong: table_epievent is empty...')
+  stop()
+}
+if(nc>0){
+  message(paste('\n ===> table_epievent added to',db.name,'\n'))
+}
 
 # Disconnect when finish querying the database:
 dbDisconnect(db)

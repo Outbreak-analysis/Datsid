@@ -1,21 +1,26 @@
 library(DBI)
 library(RSQLite)
-library(plyr)
+library(dplyr)
 
 args <- commandArgs(trailingOnly = TRUE)	
 db.path <- args[1]
+# db.path = 'abc.db'
 
 db = dbConnect(SQLite(), dbname = db.path)
-sqlcmd <- "SELECT * FROM table_epievent,table_disease,table_location
-WHERE
-table_epievent.disease_id=table_disease.disease_id AND
-table_location.location_id=table_epievent.location_id"
-q <- dbGetQuery(db,sqlcmd)
-dbDisconnect(db)
 
-x <- ddply(q,c('country','disease_name','source'),
-		   summarize,
-		   n = length(epievent_id))
-x$source <- substr(x$source,1,16)
-x2 <- x[order(x$country),]
-print(x2)
+q.epi <- dbGetQuery(db,'SELECT * FROM table_epievent')
+q.loc <- dbGetQuery(db,'SELECT * FROM table_location')
+q.dis <- dbGetQuery(db,'SELECT * FROM table_disease')
+
+dat <- q.epi %>%
+  left_join(q.loc, by='location_id') %>%
+  left_join(q.dis, by='disease_id')
+
+x <- dat %>%
+  group_by(country, disease_name, source) %>%
+  summarize(n_datapoints = length(epievent_id)) %>%
+  mutate(source = substr(source,1,16))
+print(x)
+
+message('\n [glimpse end] \n')
+
