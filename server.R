@@ -6,24 +6,31 @@ shinyServer(function(input, output) {
 	
 	output$pf <- renderPlot(
 		{
-			country    <- input$country
-			disease    <- input$disease
-			disease_type    <- input$disease_type
-			synthetic  <- input$synthetic
+		    db.path <- input$db.path
+		    country.ISO3166    <- input$country.ISO3166
+			location.name    <- input$location.name
+			disease.name   <- input$disease.name
+			disease.type  <- input$disease.type
+			disease.subtype  <- input$disease.subtype
+			event.type  <- input$event.type
 			logscale   <- input$logscale
-			
-			if(country=="any")      country <- NULL
-			if(disease=="any")      disease <- NULL
-			if(disease_type=="any") disease_type <- NULL
-			if(synthetic=="any")    synthetic <- NULL
-			
-			plot_data(db.name = input$db.name,
-					  country = country,
-					  disease = disease,
-					  disease_type = disease_type,
-					  synthetic = synthetic,
-					  logscale = logscale
-					  )
+
+			if(country.ISO3166=="any") country.ISO3166 <- ''
+			if(location.name=="any") location.name <- ''
+			if(disease.name=="any") disease.name <- ''
+			if(disease.type=="any") disease.type <- ''
+			if(disease.subtype=="any") disease.subtype <- ''
+			if(event.type=="any")   event.type <- ''
+
+			plot_data(db.path,
+			          country.ISO3166,
+			          location.name,
+			          disease.name ,
+			          disease.type,
+			          disease.subtype,
+			          event.type,
+			          synthetic,
+			          logscale = logscale)
 			
 		},
 		height=1000, 

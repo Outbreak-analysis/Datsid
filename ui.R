@@ -16,22 +16,28 @@ shinyUI(fluidPage(
 	# Sidebar with a slider input for the number of bins
 	sidebarLayout(
 		sidebarPanel(
-			textInput("db.name",
+			textInput("db.path",
 					  "Database used: ",
-					  value = db.name ),
-			
-			selectInput("country", "Country:", 
-						choices = c(z[["countries"]],"any")),
-			selectInput("disease", "Disease:", 
-						choices = c(z[["diseases"]],"any"),
+					  value = db.name ) ,
+
+			selectInput("country.ISO3166", "Country ISO3166:",
+						choices = c(z[["country"]],"any")) ,
+			selectInput("location.name", "location.name:",
+						choices = c(z[["location.name"]],"any"),
 						selected = "any"),
-			selectInput("disease_type", "Disease type:", 
-						choices = c(z[["diseases_type"]],"any"),
+			selectInput("disease.name", "disease.name:",
+						choices = c(z[["disease.name"]],"any"),
 						selected = "any"),
-			selectInput("synthetic", "Synthetic (0=real epidemic):", 
-						choices = c(z[["synthetics"]],"any"),
+			selectInput("disease.type", "disease.type:",
+			            choices = c(z[["disease.type"]],"any"),
+			            selected = "any"),
+			selectInput("disease.subtype", "disease.subtype:",
+			            choices = c(z[["disease.subtype"]],"any"),
+			            selected = "any"),
+			selectInput("event.type", "event.type:",
+						choices = c(z[["event.type"]],"any"),
 						selected = "any"),
-			
+
 			checkboxInput("logscale",
 						  "Log scale", value=FALSE)
 		),
