@@ -17,10 +17,11 @@ include stuff.mk
 
 Sources += $(wildcard *.R)
 
-Sources += buildNewDB.sh
-xxx.db: $(wildcard tables/*) buildNewDB.sh
-	/bin/rm -f $@
-	./buildNewDB.sh xxx.db
+Sources += buildDBfromScratch.sh buildNewDB.sh
+
+new.db: $(wildcard tables/*) buildDBfromScratch.sh
+	-/bin/rm -f $@
+	./$(filter %.sh, $^) $@
 
 Sources += $(wildcard sql/*.sql)
 
@@ -29,6 +30,9 @@ Sources += $(wildcard sql/*.sql)
 
 test:
 	Rscript test.R
+
+script.out: script.sh
+	./$< > $@
 
 check:
 	Rscript glimpse.R xxx.db
