@@ -31,6 +31,8 @@ Sources += $(wildcard sql/*.sql)
 test:
 	Rscript test.R
 
+## Testing scripting basics
+Sources += script.sh
 script.out: script.sh
 	./$< > $@
 

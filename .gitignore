@@ -7,7 +7,7 @@ target.mk
 .*.Rlog
 .*.wrapR.*
 *.wrapR.*
-*.Rout
+*out
 *.RData
 
 *.pdf
