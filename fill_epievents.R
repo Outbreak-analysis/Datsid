@@ -4,7 +4,7 @@ library(RSQLite)
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args)<1) stop("Not enough arguments!")
 db.name <- args[1]
- # db.name <- "abc.db"
+ # db.name <- "datsid.db"
 
 csvlist <- system("ls ./data/*-db.csv",intern = TRUE)
 
