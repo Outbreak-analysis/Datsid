@@ -1,0 +1,10 @@
+type_subtype, eventtype, disease_name, disease_type, disease_subtype, disease_subtype2
+Untyped, n_pos, influenza,,,
+A and B, n_pos, influenza,,,
+A(unsubtyped),n_pos, influenza,A,,
+A(H1N1),n_pos, influenza,A,H1N1,
+A(H1N1)pdm09,n_pos, influenza,A,H1N1,
+A(H3N2),n_pos, influenza,A,H3N2,
+B,n_pos, influenza,B,,
+C,n_pos, influenza,C,,
+

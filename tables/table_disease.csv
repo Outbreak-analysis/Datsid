@@ -20,3 +20,4 @@ disease_id,disease_name,disease_ICD,disease_type,disease_subtype,disease_subtype
 18,parainfluenza,J12.2,2,,
 19,parainfluenza,J12.2,3,,
 20,parainfluenza,J12.2,4,,
+21,influenza,J10,C,,

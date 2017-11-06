@@ -21,6 +21,7 @@ x <- dat %>%
   summarize(n_datapoints = length(epievent_id)) %>%
   mutate(source = substr(source,1,16))
 print(x)
+print(paste('A total of',prettyNum(sum(x$n_datapoints),big.mark=","),'data points.'))
 
 message('\n [glimpse end] \n')
 

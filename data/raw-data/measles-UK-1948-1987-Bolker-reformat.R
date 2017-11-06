@@ -11,14 +11,6 @@ tab.loc <- get.location.table()  %>%
 dic.loc <- read.csv('measles-UK-1948-1987-Bolker-dictionary-location.csv', 
                     stringsAsFactors=F, strip.white = T)
 
-# GB_LDN_London
-# GB_BST_Bristol
-# GB_LIV_Liverpool
-# GB_MAN_Manchester
-# GB_NET_Newcastle
-# GB_BIR_Birmingham
-# GB_SHF_Sheffield
-
 dat$disease_name = 'measles'
 
 # Identify location and disease IDs:
