@@ -25,6 +25,14 @@ __TODO__:
 * Figure out how to use (and check?) table headers
 * Incorporate this into make, or otherwise make transparent
 
+Tables
+=============
+
+To add entries in `table_location`:
+* Enter the new data in the spreadsheet `table_location_data.xlsm` and execute the macro
+* or (__not suggested__) , edit directly the file `table_location_data.csv`
+
+The script `create_table_location.R` will create the final table `table_location.csv` for the database.
 
 Synthetic Data
 ==============
