@@ -1,0 +1,5 @@
+data downloaded from: https://gis.cdc.gov/grasp/fluview/fluportaldashboard.html
+on 2017-11-06 by David Champredon.
+
+(Select "Download Data" top left green button; Select "State"-> "Select All" and  "Seasons"-> "Select All")
+
