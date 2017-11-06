@@ -58,10 +58,6 @@ df$eventtype  <- df.tmp$eventtype
 df$synthetic  <- 0 
 df$source     <- 'PHAC web'
 
-summary(df$disease_id)
-summary(df$location_id)
-
-
 fname <- fname.csv.reformated()
 write.csv(x = df, file = fname, quote = F, row.names = F)
 message(paste('Data saved to',fname))
