@@ -15,10 +15,11 @@ Structure
 * the subfolder `data/raw-data` contains the raw data files that were either manually obtained, or downloaded directly from the internet. The file name conventions are
   * `-web.R` script to download data when possible
   * `-raw.csv` for downloaded data (either manually or with `-web.R` script)
-  * `-dictionary-*.csv` is human-readable metadata (but complicated)
+  * `-dictionary-*.csv` is human-readable metadata used for substitutions 
+  * `-info.csv` some more metadata about the raw data file
   * `-reformat.R` converts input csvs to final version:
-	* `-db.csv` formated data ready for import into the database. These files are copied in the `data` folder.
-* `sql` folder contains the SQL scripts.
+  * `-db.csv` formated data ready for import into the database. These files are copied in the `data` folder.
+* `sql` folder contains SQL scripts.
 
 __TODO__:
 * Figure out how to use (and check?) table headers
