@@ -6,7 +6,7 @@
 * -raw.csv for downloaded data
 * -info.csv is human-readable metadata (but complicated)
 * -reformat.R converts input csvs to final version:
-	* -db.csv
+* -db.csv data formatted for import to database
 
 
 Some data sets cannot be downloaded directly with a script from the web, so they are downloaded manually and saved as a `-raw.csv` file. These datasets are:
