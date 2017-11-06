@@ -3,32 +3,27 @@
 Overview
 ========
 This repo provides scripts that can build from scratch a SQLite database. 
-The database is built from epidemiological time series (incidence, deaths, etc.) that must be saved in the _correct format_ in the `data` folder (see data/README.md). Information regarding the the disease itself and/or the geographical locations must be entered beforehand (in the `tables` folder) if they are new. 
+The database is built from epidemiological time series (incidence, deaths, etc.) that must be saved in the _correct format_ in the `data` folder (see data/README.md). 
+There are three main tables (for now) that define the relational database: one that defines the diseases (`table_disease`), one that defines the locations where the epidemic was observed (`table_location`) and finally one that records the epidemic, that is which disease was observed where (`table_epievent`). This last table is automaticaly built.
+Information regarding the diseases and the geographical locations must be entered beforehand in these tables.
 
 Structure
 ========
 
-* `data` folder contains the `.csv` files containing the epidemiological data that populates the database.
-	* There are also Excel spreadsheets that were used to generate the `csv` files using a macro in `__convert_to_csv.xlsm`.
-	* The spreadsheet `__table_epievent_template.xlsx` provides a template for importing (and manipulating) new data.
-	* The `csv` files should not have headers. There should be one column corresponding to each column in the SQL table (except for the first column which consists of unique IDs).
-* `tables` folder with static tables (describing diseases, locations, etc.)
+* `tables` folder with static tables (describing diseases, locations, etc.). There are also Excel spreadsheet that facilitates entering new entries in these tables. 
+* `data` folder contains the `*-db.csv` files containing the epidemiological data that populates the database.
+* the subfolder `data/raw-data` contains the raw data files that were either manually obtained, or downloaded directly from the internet. The file name conventions are
+  * `-web.R` script to download data when possible
+  * `-raw.csv` for downloaded data (either manually or with `-web.R` script)
+  * `-dictionary-*.csv` is human-readable metadata (but complicated)
+  * `-reformat.R` converts input csvs to final version:
+	* `-db.csv` formated data ready for import into the database. These files are copied in the `data` folder.
+* `sql` folder contains the SQL scripts.
 
 __TODO__:
 * Figure out how to use (and check?) table headers
 * Incorporate this into make, or otherwise make transparent
-  
-See the `documentation` folder for the database diagram.
 
-To add data in the data base:
-- if new disease add it in `tables/table_disease.csv` 
-- if new location add it in `tables/table_location.csv`
-- if new epidemiological data (incidence,etc.):
-  - insert data using Excel spreadsheet template `table_epievent_template.xlsx` (Warning: date must be string formated as yyyy-mm-dd)
-  - save Excel spreadsheet as a `csv` using the macro in `__convert_to_csv.xlsm`
-- two options:
-  - to add this new data set to an existing database, execute `add_timeseries xxx.db yyy.csv` to include in the existing database `xxx.db` data saved in `yyy.csv`.
-  - to rebuild the _whole_ database, execute `./buildNewDB xxx.db` (create a new database (named `xxx.db`) filled with data from all csv files in `data` and `tables` folders)
 
 Synthetic Data
 ==============
@@ -40,7 +35,8 @@ Running `gen-syndata n` will generate `n` stochastic realizations for each param
 
 Using the database in R
 =======================
-The file `test.R` shows how an epidemic time series can simple be called from the database by refering, for example, to its country and disease name. Run `Rscript test.R` for an example.
+
+The program `buildDBfromScratch.sh abc.db` will download the raw data from the internet and use the manually saved raw data to create a new database named `abc.db`. Note: `abc.db` must not already exist.
 
 Running `glimpse abc.db` gives a summary of the data in the database `abc.db`.
 

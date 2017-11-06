@@ -42,10 +42,10 @@ df.tmp <- left_join(dat, dic.dis, by='type') %>%
     create.location.key() %>%
     left_join(tab.loc, by='key')
 
-
-a <- df.tmp[is.na(df.tmp$disease_id),]
-unique(a$type)
-write.csv(file = 'toto.csv',x = dat$type[grepl('PIV',dat$type)])
+# DEBUG:
+# a <- df.tmp[is.na(df.tmp$disease_id),]
+# unique(a$type)
+# write.csv(file = 'toto.csv',x = dat$type[grepl('PIV',dat$type)])
 
 # Create data frame for epievent table
 df <- create.empty.epievent.df(n)

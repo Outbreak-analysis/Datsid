@@ -1,7 +1,7 @@
 #!/bin/bash
 cd $(dirname $0) 
 
-## Check tables
+## Check tables for duplicates, etc.
 Rscript table_checks.R
 
 ## Download & reformat data for tables
@@ -12,7 +12,7 @@ Rscript table_checks.R
 sqlite3 $1 < ./sql/create_tables.sql
 
 ## Fill in data from data/ directory
-## Rscript fill_epievents.R $1
+Rscript fill_epievents.R $1
 
-## Make some plots
-## Rscript plot_data.R $1
+## Summary of this new database
+./glimpse $1
