@@ -10,8 +10,6 @@ tab.loc <- get.location.table()  %>%
 
 dic.dis <- read.csv('influenza-Australia-DptHealth-dictionary-disease.csv', 
                     stringsAsFactors=F, strip.white = T)
-
-#CHANGE NAME FILE!
 dic.loc <- read.csv('influenza-Australia-DptHealth-dictionary-location.csv', 
                     stringsAsFactors=F, strip.white = T)
 
