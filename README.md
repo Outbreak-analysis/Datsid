@@ -45,7 +45,8 @@ Running `gen-syndata n` will generate `n` stochastic realizations for each param
 Using the database in R
 =======================
 
-The program `buildDBfromScratch.sh abc.db` will download the raw data from the internet and use the manually saved raw data to create a new database named `abc.db`. Note: `abc.db` must not already exist.
+The program `buildDBfromScratch.sh abc.db` will download the raw data from the internet (scan and execute all `*-webR` scripts in the folder `data/raw-data`) and use raw data (manually saved if no `*-web.R` script exists) to create a new database named `abc.db`. 
+Note: `abc.db` must not already exist.
 
 Running `glimpse abc.db` gives a summary of the data in the database `abc.db`.
 
