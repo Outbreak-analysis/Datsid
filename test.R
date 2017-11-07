@@ -8,22 +8,12 @@ out <- system(paste('ls',db.name),intern = TRUE)
 if(length(out)==0) 
     system(paste("./buildNewDB",db.name))
 
-# Pick an epidemic:
-country <- "SIERRA LEONE"
-disease <- "ebola"
-
-# Retrieve the data:
-x <- get.epi.ts(db.name, country, disease, synthetic = NULL)
-
-# Plot the data:
-library(ggplot2)
-x$date <- as.Date(x$reportdate)
-x2 <- subset(x, eventtype=='incidence')
-g <- ggplot(x2) + 
-    geom_step(aes(x=date,y=count)) +
-    ggtitle(paste(disease, country)) + 
-    facet_wrap(~adminDiv1, scales='free_y')
-
+# Retrieve and plot the data
+# of an arbitrary epidemic:
 pdf('test-plot.pdf', width = 15, height = 12)
-plot(g)
+x <- get.epi.ts.NEW(db.path = db.name, 
+                    country.ISO3166 = 'SL',
+                    location.name = 'Sierra Leone',
+                    disease.name = 'ebola',
+                    do.plot = TRUE)
 dev.off()
