@@ -22,7 +22,6 @@ Structure
 * `sql` folder contains SQL scripts.
 
 __TODO__:
-* Figure out how to use (and check?) table headers
 * Incorporate this into make, or otherwise make transparent
 
 Tables
@@ -47,6 +46,8 @@ Using the database in R
 
 The program `buildDBfromScratch.sh abc.db` will download the raw data from the internet (scan and execute all `*-webR` scripts in the folder `data/raw-data`) and use raw data (manually saved if no `*-web.R` script exists) to create a new database named `abc.db`. 
 Note: `abc.db` must not already exist.
+
+The program `buildNewDB.sh` builds a new database from the _existing_ `data/*-db.csv` files. In other words, the datasets are not downloaded nor reformated.
 
 Running `glimpse abc.db` gives a summary of the data in the database `abc.db`.
 
