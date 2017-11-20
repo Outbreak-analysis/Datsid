@@ -30,7 +30,7 @@ df$disease_id <- df.tmp$disease_id
 df$location_id<- df.tmp$location_id
 df$reportdate <- df.tmp$date
 df$count      <- df.tmp$count
-df$eventtype  <- df.tmp$eventtype
+df$eventtype  <- 'incidence'
 df$synthetic  <- 0 
 df$source     <- 'Bolker webpage'
 

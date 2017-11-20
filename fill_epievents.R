@@ -31,7 +31,13 @@ if(!success){
 
 ## Import new data in existing database:
 for(i in 1:length(csvlist)){
-	newdat <- read.csv(file = csvlist[i], header = TRUE)
+	
+    message(paste('Reading',csvlist[i],'...'))
+    newdat <- read.csv(file = csvlist[i], header = TRUE)
+	
+	# print(head(newdat))
+    stopifnot(length(names(newdat)) == 13)
+	
 	dbWriteTable(db,"tmp_epievent", newdat, append=TRUE)
 	
 	message(paste0("Data in ",
