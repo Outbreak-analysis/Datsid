@@ -1,0 +1,32 @@
+2018 Jan 12 (Fri)
+=================
+
+JD vs. Walt
+-----------
+
+* make structure
+	* We want a structure that allows us to build and flexibly rebuild a database
+	* Use "semaphore" files that signal whether a particular database is up-to-date wrt a particular "chunk" of data
+		* a semaphore is like a phony target that exists
+
+* What's good about sqlite?
+	* vs. doing everything in R
+	* keyword: tidyverse (start with dplyr introduction maybe)
+
+* What's good about SQL?
+	* vs. filtering and pipes
+
+* sqlite vs sq"heavy" (MySQL)
+	* simpler (a library that you link against your program
+	* heavy things are needed for security, multi-user …
+
+* caching
+
+* JD R rules
+
+* WM to do:
+	* learn about tidyverse/dplyr
+	* how good is tbl for indexing?
+	* how hard is it to export/import sql databases from R?
+	* Work on chunking and rebuilding DC's stuff
+
