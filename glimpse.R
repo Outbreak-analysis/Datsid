@@ -4,13 +4,14 @@ library(dplyr)
 
 args <- commandArgs(trailingOnly = TRUE)	
 db.path <- args[1]
-# db.path = 'abc.db'
+# db.path = 'datsid.db'  'abc.db'
 
-db = dbConnect(SQLite(), dbname = db.path)
+db = DBI::dbConnect(RSQLite::SQLite(), dbname = db.path)
+q.epi <- DBI::dbGetQuery(db,'SELECT * FROM table_epievent')
+q.loc <- DBI::dbGetQuery(db,'SELECT * FROM table_location')
+q.dis <- DBI::dbGetQuery(db,'SELECT * FROM table_disease')
+DBI::dbDisconnect(conn = db)
 
-q.epi <- dbGetQuery(db,'SELECT * FROM table_epievent')
-q.loc <- dbGetQuery(db,'SELECT * FROM table_location')
-q.dis <- dbGetQuery(db,'SELECT * FROM table_disease')
 
 dat <- q.epi %>%
   left_join(q.loc, by='location_id') %>%

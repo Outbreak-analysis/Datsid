@@ -74,9 +74,9 @@ get.epi.ts.NEW <- function(db.path,
                            country.ISO3166 = '',
                            location.name = '',
                            disease.name = '',
-                           disease.type = '',
-                           disease.subtype = '',
-                           event.type = '',
+                           disease.type = NULL,
+                           disease.subtype = NULL,
+                           event.type = NULL,
                            synthetic=0,
                            do.plot = FALSE,
                            plot.logscale=FALSE) {
@@ -89,9 +89,9 @@ get.epi.ts.NEW <- function(db.path,
     if(country.ISO3166 != '') x <- filter(x, country == country.ISO3166)
     if(location.name != '')   x <- filter(x, location_name == location.name)
     if(disease.name != '')    x <- filter(x, disease_name == disease.name)
-    if(event.type != '') {x <- filter(x, eventtype==event.type)}
-    if(disease.type != '')    x <- filter(x, disease_type==disease.type)
-    if(disease.subtype != '') x <- filter(x, disease_subtype==disease.subtype)
+    if(!is.null(event.type))  x <- filter(x, eventtype==event.type)
+    if(!is.null(disease.type))     x <- filter(x, disease_type==disease.type)
+    if(!is.null(disease.subtype)) x <- filter(x, disease_subtype==disease.subtype)
     print(nrow(x))
     
     # Converts dates in R Data format:

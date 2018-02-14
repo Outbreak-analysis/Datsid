@@ -20,7 +20,6 @@ if(check.dis>0 | check.loc>0){
     stop()
 }
 
-
 # remove French characters:
 dat$regions     <- anglicize(dat$regions)
 dic.loc$regions <- anglicize(dic.loc$regions)
@@ -49,7 +48,6 @@ df.tmp <- left_join(dat, dic.dis, by='type') %>%
 
 # Create data frame for epievent table
 df <- create.empty.epievent.df(n)
-
 df$disease_id <- df.tmp$disease_id
 df$location_id<- df.tmp$location_id
 df$reportdate <- df.tmp$date

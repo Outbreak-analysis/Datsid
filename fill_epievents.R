@@ -13,7 +13,7 @@ db = dbConnect(SQLite(), dbname=db.name)
 
 # Tables setup: location, disease 
 table.location <- read.csv("tables/table_location.csv", stringsAsFactors = F)
-table.disease <- read.csv("tables/table_disease.csv", stringsAsFactors = F)
+table.disease  <- read.csv("tables/table_disease.csv", stringsAsFactors = F)
 
 check.loc <- dbWriteTable(db,"table_location", table.location, append=TRUE)
 check.dis <- dbWriteTable(db,"table_disease", table.disease, append=TRUE)
@@ -31,12 +31,14 @@ if(!success){
 
 ## Import new data in existing database:
 for(i in 1:length(csvlist)){
-	
     message(paste('Reading',csvlist[i],'...'))
     newdat <- read.csv(file = csvlist[i], header = TRUE)
 	
 	# print(head(newdat))
-    stopifnot(length(names(newdat)) == 13)
+    if(length(names(newdat)) != 13){
+        message('Something went wrong with newdat columns')
+        message(paste(length(names(newdat)),' != 13'))
+    }
 	
 	dbWriteTable(db,"tmp_epievent", newdat, append=TRUE)
 	
