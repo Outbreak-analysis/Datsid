@@ -85,14 +85,14 @@ get.epi.ts.NEW <- function(db.path,
     
     x <- get.joined.tables(db.path)
     
-    
     if(country.ISO3166 != '') x <- filter(x, country == country.ISO3166)
     if(location.name != '')   x <- filter(x, location_name == location.name)
     if(disease.name != '')    x <- filter(x, disease_name == disease.name)
     if(!is.null(event.type))  x <- filter(x, eventtype==event.type)
-    if(!is.null(disease.type))     x <- filter(x, disease_type==disease.type)
+    if(!is.null(disease.type))    x <- filter(x, disease_type==disease.type)
     if(!is.null(disease.subtype)) x <- filter(x, disease_subtype==disease.subtype)
-    print(nrow(x))
+    
+    print(paste('returning',nrow(x),'rows from database',db.path))
     
     # Converts dates in R Data format:
     x$reportdate <- as.Date(x$reportdate, format = '%Y-%m-%d')
