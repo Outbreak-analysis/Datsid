@@ -124,12 +124,6 @@ subset.date.epi.ts <- function(epi.ts, reportdate.min, reportdate.max) {
     return(x)
 }
 
-
-
-
-
-
-
 get.epi.ts <- function(db.path, 
                        country,
                        disease,
@@ -192,8 +186,6 @@ get.epi.ts <- function(db.path,
     
     return(q2)
 }
-
-
 
 date.to.duration <- function(datevec){
     ### Convert date in string format to numeric duration

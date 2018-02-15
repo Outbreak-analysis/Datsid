@@ -45,7 +45,7 @@ ui <- fluidPage(
                      actionButton("go", "Update plot")
         ),
         
-        # Show a plot of the generated distribution
+        # Show a plot of the epidemic
         mainPanel(
             plotOutput("pf")
         )
@@ -175,6 +175,7 @@ server <- function(input, output, session) {
     
     # ---- PLOT ----
     
+    # 'eventReactive': Plot only if update button is clicked
     theplot <- eventReactive(input$go, {
         db.path       <- input$db.path
         country       <- input$country
