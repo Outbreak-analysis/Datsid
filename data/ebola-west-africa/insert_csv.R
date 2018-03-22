@@ -43,7 +43,7 @@ INSERT INTO epievents (disease_id, location_id, report_date, cases, eventtype_id
 
 for (i in 1:nrow(table.csv)) {
     locationId <- getLocationId(db, table.csv[[i,'country']])
-    reportDate <- as.character(table.csv[[i, "WHO report date"]])
+    reportDate <- as.character(pull(table.csv[i, "WHO report date"]))
     reportCases <- as.numeric(table.csv[[i, 'val']])
     reportEv <- table.csv[[i, 'ev']]
     eventId <- getEventId(db, reportEv)
